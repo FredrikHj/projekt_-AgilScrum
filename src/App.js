@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Chess from 'chess.js';
+// import Chess from 'chess.js';
 
 function App() {
   return (
