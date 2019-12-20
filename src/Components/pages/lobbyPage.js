@@ -5,22 +5,29 @@ import {
   Route,
   Link
 } from 'react-router-dom';import { Button } from '../Button.js';
-let gameLisrArr = [];
+import { GameMordal } from '../ModalPopUp.js';
 
-function lobbyPage(props) {
-  console.log(props);
-  
+function LobbyPage(props) {
+
+  const [ addGameName, setAddGameName ] = useState(null);
+  let getUserName = window.localStorage.getItem("userData")
+
   return (
-    <div>
+    <section className="subPagesContainer">
       <h1>GameList!</h1>
-      <h4>{ props.userName}</h4>
-      
-      <Button 
-          name="Add Game"
-          function={ props.runNewGame }
-      />  
-    </div>
+      <GameMordal
+        
+      />
+      <main className="subPagesContents">
+        <h4>{ `${ getUserName } & Playser 2` }</h4>
+        
+        <Button 
+            name="Add Game"
+            function={ props.runNewGame }
+            />  
+      </main>
+    </section>
   );
 }
 
-export default lobbyPage;
+export default LobbyPage;

@@ -2,9 +2,14 @@ import React from 'react';
 
 function gamePage() {
   return (
-    <div>
-      GAMEPAGE!
-    </div>
+    <>
+      <section className="subPagesContainer">
+        GAMEPAGE!
+        <main className="subPagesContents">
+          
+        </main>
+      </section>
+    </>
   );
 }
 

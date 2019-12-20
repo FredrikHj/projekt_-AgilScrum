@@ -1,8 +1,31 @@
 *{
     border: 1px solid red;
 }
-
-/* Bytton component */
+.subPagesContainer{
+    margin-left: calc(50% - 150px);
+}
+.subPagesContents{
+    justify-content: space-between;
+    flex-direction: row;
+    display: flex;
+    width: 500px;
+}
+.userNameContainer{
+    width: 230px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: #2ba6cb;
+    border-radius: 3px;
+    border: 1px solid #1e728c;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 15px 5px 0 0;
+    padding: 10px 15px;
+}
+/* Components */
 .button{
     background: #2ba6cb;
     border-radius: 3px;
@@ -17,4 +40,10 @@
     padding: 10px 15px;
     text-align: center;
     text-decoration: none;
+}
+.input{
+    width: 100px;
+}
+.mordalPopUp{
+    
 }

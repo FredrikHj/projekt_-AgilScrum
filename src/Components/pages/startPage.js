@@ -9,6 +9,7 @@ import {
 import { updateLocalstorage } from '../localStorage.js';
 import { Button } from '../Button.js';
 
+
 function StartPage(props) {
   const [ userName, setUserName ] = useState(null);
 
@@ -22,8 +23,9 @@ function StartPage(props) {
 console.log(userName);
 
   return (
-    <section className="chessLandingPage">
-      <div id="userNameContainer">
+    <section className="subPagesContainer">
+
+      <div className="userNameContainer">
         <label id="userName">Username --></label>
         <input type="text" id="userName" className="input" onChange={ runUserName } value={ userName } />
       </div>
