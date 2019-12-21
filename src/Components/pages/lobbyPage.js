@@ -4,8 +4,9 @@ import {
   Switch,
   Route,
   Link
-} from 'react-router-dom';import { Button } from '../Button.js';
-import { GameMordal } from '../ModalPopUp.js';
+} from 'react-router-dom';
+import Button from '../Button.js';
+import GameMordal from '../ModalPopUp.js';
 
 function LobbyPage(props) {
 

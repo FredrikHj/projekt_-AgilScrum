@@ -1,7 +1,23 @@
 import React from 'react';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+  } from 'react-router-dom';
 
-export let Button = (props) => {
+const Button = (props) => {
+    console.log(props);
+    
     return (
-        <button className="button" onclick={ props.function }>{ props.name} </button>
+        <>
+            {(props.patchLink === true)
+                ?   <Link to={ props.patchTo }>
+                        <button className="button" onclick={ props.function }>{ props.name }</button>
+                    </Link>
+                : <button className="button" onclick={ props.function }>{ props.name} </button>
+            }
+        </>
     );
 }
+export default Button;

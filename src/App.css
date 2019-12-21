@@ -2,13 +2,11 @@
     border: 1px solid red;
 }
 .subPagesContainer{
-    margin-left: calc(50% - 150px);
-}
-.subPagesContents{
+    margin-left: calc(50% - 300px);
+    width: 600px;
     justify-content: space-between;
     flex-direction: row;
     display: flex;
-    width: 500px;
 }
 .userNameContainer{
     width: 230px;

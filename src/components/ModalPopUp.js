@@ -1,7 +1,7 @@
 import React from 'react';
-import { Button } from './Button.js';
+import Button from './Button.js';
 
-export const GameMordal = (props) => {
+const GameMordal = (props) => {
     return (
         <section className="">
             <div>
@@ -17,3 +17,4 @@ export const GameMordal = (props) => {
         </section>
     );
 }
+export default GameMordal;
