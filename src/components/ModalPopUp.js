@@ -9,11 +9,7 @@ const GameMordal = (props) => {
                 <input type="text" id="chessName" onChange={ props.runAddGameName } value={ props.addGameName } />
             </div>
 
-            <Button 
-                name="Add Game"
-                function={ props.runNewGame }
-            /> 
-            
+            <Button name="Start Game" function={ props.function } />
         </section>
     );
 }

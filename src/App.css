@@ -8,6 +8,11 @@
     flex-direction: row;
     display: flex;
 }
+.gameListContainer{
+    justify-content: none;
+    flex-direction: none;
+    display: block;
+}
 .userNameContainer{
     width: 230px;
     display: flex;

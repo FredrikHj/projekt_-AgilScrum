@@ -9,24 +9,37 @@ import Button from '../Button.js';
 import GameMordal from '../ModalPopUp.js';
 
 function LobbyPage(props) {
+  const [ userName, setUserName ] = useState(false);
+  const [ runGame, setRunGame ] = useState(false);
+  
+  useEffect(() => {
+    const getUserName = window.localStorage.getItem("userData");
+    setUserName(getUserName);
+  });
+  const runNewGame = () => {
+    console.log('knapp');
+    
+    setRunGame(true);
+  }
+  const startGame = () => {
 
-  const [ addGameName, setAddGameName ] = useState(null);
-  let getUserName = window.localStorage.getItem("userData")
-
+  }
   return (
-    <section className="subPagesContainer">
+    <section className="subPagesContainer gameListContainer">
       <h1>GameList!</h1>
-      <GameMordal
-        
-      />
-      <main className="subPagesContents">
-        <h4>{ `${ getUserName } & Playser 2` }</h4>
-        
-        <Button 
-            name="Add Game"
-            function={ props.runNewGame }
-            />  
-      </main>
+      <section className="gameListContainer">
+
+        <main className="subPagesContents">
+          <h4>{ `${ userName } & Playser 2` }</h4>
+          {(runGame === true)
+            ? <GameMordal function={ startGame } />
+            : null
+          }
+          
+          <button className="button" onclick={ runNewGame }>Add New Game</button>
+          <Button name="Add Game" function={ runNewGame } />
+        </main>
+      </section>
     </section>
   );
 }

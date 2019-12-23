@@ -19,11 +19,13 @@ function StartPage(props) {
     const targetStr = e.target.value;
     console.log(targetStr);
     
-    updateLocalstorage(targetStr);
+    const userNamesStorage = {
+      player1: targetStr,
+      player2: 'player2'
+    }
+    updateLocalstorage(userNamesStorage);
     setUserName(targetStr);
 }
-console.log(userName);
-
   return (
     <section className="subPagesContainer">
 
