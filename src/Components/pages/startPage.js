@@ -41,8 +41,6 @@ function StartPage(props) {
         function={ '' }
       /> 
     </section>
-          
-            
   );
 }
 

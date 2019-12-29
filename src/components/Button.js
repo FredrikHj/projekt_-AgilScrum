@@ -11,13 +11,14 @@ const Button = (props) => {
     
     return (
         <>
-{/*             {(props.patchLink === true)
+            {(props.patchLink === true)
                 ?   <Link to={ props.patchTo }>
                         <button className="button" onclick={ props.function }>{ props.name }</button>
-                    </Link> */}
-                /:
-                 <button className="button" onclick={ props.function }>{ props.name }</button>
-         </>
+                    </Link>
+
+                :   <button className="button" onclick={ props.function }>{ props.name }</button>
+            }
+        </>
     );
 }
 export default Button;

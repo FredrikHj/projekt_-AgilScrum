@@ -5,9 +5,9 @@ import routes from './routes/routes';
 
 function App() {
   return (
-    <section className="chessBody">
+    <div className="chessBody">
       {routes}
-    </section>
+    </div>
   );
 }
 
