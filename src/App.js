@@ -5,11 +5,7 @@ import routes from './routes/routes';
 
 function App() {
   return (
-<<<<<<< HEAD
-    <div className="chessBody">
-=======
     <div className="App">
->>>>>>> development
       {routes}
     </div>
   );
