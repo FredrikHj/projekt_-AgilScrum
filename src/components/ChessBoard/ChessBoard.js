@@ -4,16 +4,10 @@ import Chess from 'chess.js';
 import './chessground.css';
 import './theme.css';
 
-function ChessBoard(props) {
-  let cg = null;
-  let chess = null;
+let cg = null;
+let chess = null;
 
-  /* function validateMove(from, to) {
-    const validMoves = chess.moves({ verbose: true });
-    const idx = validMoves.findIndex((validMove) => validMove.from === from && validMove.to === to);
-    return idx !== -1;
-  } */
-
+function ChessBoard({ fenKey, postMove, color }) {
   function checkPromotion(from, to) {
     const validMoves = chess.moves({ square: from, verbose: true });
     const idx = validMoves.findIndex(
@@ -47,15 +41,9 @@ function ChessBoard(props) {
     }
   }
 
-  function setColorTurn(color) {
-    cg.set({
-      movable: { color: color === 'white' ? 'black' : 'white', dests: toDest(chess.moves({ verbose: true })) },
-    });
-  }
-
   function afterMovePiece(before, after) {
     chessMakeMove(before, after);
-    setColorTurn(cg.state.movable.color);
+    postMove(chess.fen());
   }
 
   function createChessground() {
@@ -64,14 +52,32 @@ function ChessBoard(props) {
     cg = Chessground(boardContainer, {
       movable: {
         events: { after: afterMovePiece },
-        color: props.color,
+        color,
         dests: toDest(chess.moves({ verbose: true })),
         free: false,
       },
       coordinates: false,
-      orientation: props.color,
+      orientation: color,
+      fen: fenKey,
     });
+    chess.load(fenKey);
   }
+
+  useEffect(() => {
+    if (cg && chess) {
+      cg.set({
+        fen: fenKey,
+      });
+      chess.load(fenKey);
+      const turnColor = chess.turn() === 'w' ? 'white' : 'black';
+      cg.set({
+        turnColor,
+        movable: {
+          dests: toDest(chess.moves({ verbose: true })),
+        },
+      });
+    }
+  }, [fenKey]);
 
   useEffect(() => {
     createChessground();

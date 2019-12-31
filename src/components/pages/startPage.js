@@ -1,6 +1,6 @@
 import React from 'react';
 
-function startPage() {
+function StartPage() {
   return (
     <div>
       STARTPAGE!
@@ -8,4 +8,4 @@ function startPage() {
   );
 }
 
-export default startPage;
+export default StartPage;

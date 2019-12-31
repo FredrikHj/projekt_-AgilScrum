@@ -1,6 +1,6 @@
 import React from 'react';
 
-function lobbyPage() {
+function LobbyPage() {
   return (
     <div>
       LOBBYPAGE!
@@ -8,4 +8,4 @@ function lobbyPage() {
   );
 }
 
-export default lobbyPage;
+export default LobbyPage;
