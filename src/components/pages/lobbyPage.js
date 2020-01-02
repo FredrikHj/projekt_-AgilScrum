@@ -30,11 +30,8 @@ function LobbyPage(props) {
       <section className="gameListContainer">
 
         <main className="subPagesContents">
-          <h4>{ `${ userName } & Player 2` }</h4>
-          {(runGame === true)
-            ? <GameMordal function={ startGame } />
-            : null
-          }
+          <h4>{ userName }</h4>
+
           
           <button className="button" onclick={ runNewGame }>Add New Game</button>
           <Button name="Add Game" function={ runNewGame } />

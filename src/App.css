@@ -1,6 +1,6 @@
-*{
+/* *{
     border: 1px solid red;
-}
+} */
 .subPagesContainer{
     margin-left: calc(50% - 300px);
     width: 600px;
