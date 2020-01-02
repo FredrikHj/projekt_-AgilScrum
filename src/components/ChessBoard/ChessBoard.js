@@ -3,6 +3,7 @@ import { Chessground } from 'chessground';
 import Chess from 'chess.js';
 import './chessground.css';
 import './theme.css';
+import { toDest } from '../../utils';
 
 let cg = null;
 let chess = null;
@@ -14,18 +15,6 @@ function ChessBoard({ fenKey, postMove, color }) {
       (validMove) => validMove.from === from && validMove.to === to && validMove.promotion,
     );
     return idx !== -1;
-  }
-
-  function toDest(validMoves) {
-    const rv = {};
-    validMoves.forEach((move) => {
-      if (rv[move.from]) {
-        rv[move.from].push(move.to);
-      } else {
-        rv[move.from] = [move.to];
-      }
-    });
-    return rv;
   }
 
   function chessMakeMove(from, to) {

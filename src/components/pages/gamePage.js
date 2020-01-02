@@ -12,6 +12,7 @@ function GamePage(props) {
         return data.players[key].color;
       }
     } */
+    return 'white';
   }
 
   function postMove(fen) {
@@ -22,11 +23,14 @@ function GamePage(props) {
   }
 
   useEffect(() => {
-    const paramId = props.match.params.id;
+    /* const paramId = props.match.params.id;
     axios.get(`http://localhost:3030/api/game/${paramId}`)
       .then((res) => {
         setData(res.data);
-      });
+      }); */
+    setData({
+      fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
+    });
   }, []);
 
   return (
