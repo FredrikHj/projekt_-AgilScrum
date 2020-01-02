@@ -18,6 +18,7 @@ app.listen(PORT, () => {
 
 app.use(bodyParser.json());
 
+
 app.get('/api/lobby', (req, res) => {
   res.status(200).send(games);
 });
@@ -50,11 +51,19 @@ app.post('/api/lobby', (req, res) => {
     games.push(game);
     fs.writeFile('./server/games.json', JSON.stringify(games), err => {
       if (err) throw err;
-      console.log('The file has been saved!');
     });
-    res.status(200).send(game);
+    res.status(201).send(game);
   } catch (err) {
     res.status(400).send({ error: 'Could not create game, try again!' });
     throw err;
   }
 });
+
+app.delete('/api/lobby', (req, res) => {
+  fs.writeFile('./server/games.json', '[]', err => {
+    if (err) throw err;
+  });
+  res.status(200).send('games deleted!');
+});
+
+module.exports = app;
