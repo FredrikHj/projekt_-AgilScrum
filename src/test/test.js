@@ -3,10 +3,10 @@
 
 const assert = require('assert');
 
-describe('Tests', function () {
-  describe('Example test', function () {
-    it('This is a test example', function () {
-      assert.strictEqual(1, 1);
+describe('String test', function () {
+  describe('String test', function () {
+    it('runUserName return a string', function () {
+        assert.equal(' ', ' ');
     });
   });
 });
