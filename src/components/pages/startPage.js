@@ -25,7 +25,7 @@ function StartPage(props) {
     }
     updateLocalstorage(userNamesStorage);
     setUserName(targetStr);
-}
+  }
   return (
     <section className="subPagesContainer">
 
