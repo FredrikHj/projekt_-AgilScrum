@@ -1,3 +1,4 @@
-export let updateLocalstorage = (userNameStr) =>{
-    localStorage.setItem('userName', userNameStr);
-}
+const updateLocalstorage = (userNameStr) => {
+  localStorage.setItem('userName', userNameStr);
+};
+export default updateLocalstorage;

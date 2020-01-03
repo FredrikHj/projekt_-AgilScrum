@@ -1,24 +1,23 @@
 import React from 'react';
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-  } from 'react-router-dom';
+  Link,
+} from 'react-router-dom';
 
 const Button = (props) => {
-    console.log(props);
-    
-    return (
-        <>
-            {(props.patchLink === true)
-                ?   <Link to={ props.patchTo }>
-                        <button className="button">{ props.name }</button>
-                    </Link>
+  const {
+    patchLink, patchTo, name, bFunction,
+  } = props;
+  return (
+    <>
+      {(patchLink === true)
+        ? (
+          <Link to={patchTo}>
+            <button type="button" className="button">{ name }</button>
+          </Link>
+        )
 
-                :   <button className="button" onclick={ props.function }>{ props.name }</button>
-            }
-        </>
-    );
-}
+        : <button type="button" className="button" onClick={bFunction}>{ name }</button>}
+    </>
+  );
+};
 export default Button;

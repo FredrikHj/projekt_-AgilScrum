@@ -1,55 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from 'react-router-dom';
+import React, { useState } from 'react';
+import updateLocalstorage from '../localStorage';
+import Button from '../Button';
 
-<<<<<<< HEAD
-import { updateLocalstorage } from '../localStorage.js';
-import Button from '../Button.js';
-import LobbyPage from './lobbyPage.js';
-
-
-function StartPage(props) {
-  const [ userName, setUserName ] = useState(null);
-  const [ link, setLink ] = useState(true);
+function StartPage() {
+  const [userName, setUserName] = useState(null);
+  const link = true;
 
   const runUserName = (e) => {
     const targetStr = e.target.value;
-    console.log(targetStr);
-    
-    const userNamesStorage = {
-      player1: targetStr,
-      player2: 'player2'
-    }
-    updateLocalstorage(userNamesStorage);
+
+    updateLocalstorage(targetStr);
     setUserName(targetStr);
-}
-=======
-function StartPage() {
->>>>>>> development
+  };
   return (
     <section className="subPagesContainer">
 
       <div className="userNameContainer">
-        <label id="userName">Username --></label>
-        <input type="text" id="userName" className="input" onChange={ runUserName } value={ userName } />
+        <label htmlFor="userName">
+          Username
+          <input type="text" id="userName" className="input" onChange={runUserName} value={userName} />
+        </label>
       </div>
-      <Button 
-        patchLink={ link }
+      <Button
+        patchLink={link}
         patchTo="/lobby"
         className=""
         name="GoTo Lobby"
-        function={ '' }
-      /> 
+        function=""
+      />
     </section>
   );
 }
 
-<<<<<<< HEAD
 export default StartPage;
-=======
-export default StartPage;
->>>>>>> development

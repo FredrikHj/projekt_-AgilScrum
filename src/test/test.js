@@ -4,11 +4,12 @@
 const assert = require('assert');
 const { toDest } = require('../utils/index');
 
-describe('String test', function () {
+describe('Tests', function () {
   describe('String test', function () {
     it('runUserName return a string', function () {
-        assert.equal(' ', ' ');
-describe('Tests', function () {
+      assert.equal(' ', ' ');
+    });
+  });
   describe('toDest function', function () {
     let data;
     let expected;
