@@ -22,6 +22,11 @@ app.listen(PORT, () => {
   console.log(`Listening on ${PORT}`);
 });
 
+app.use((req, res, next) => {
+  res.set('Access-Control-Allow-Orgin', '*');
+  next();
+});
+
 app.use(bodyParser.json());
 
 app.get('/api/lobby', (req, res) => {
