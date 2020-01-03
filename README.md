@@ -42,6 +42,7 @@ Implementerat **GET /api/lobby** & **POST /api/lobby** för att lista alla rum s
 
 
 # Sprint 2 (2020-01-02 - 2020-01-08)
+> Scrum master: Jonas
 
 ## Sprint plan
 

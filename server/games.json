@@ -1,1 +1,79 @@
-[]
+[
+    {
+        "id": "67192530-2e1a-11ea-b559-bd32da32b6ef",
+        "gameName": "emils game",
+        "players": [
+            {
+                "id": "67194c40-2e1a-11ea-b559-bd32da32b6ef",
+                "playerName": "emil",
+                "color": "white"
+            }
+        ],
+        "fen": "katla",
+        "history": [
+            {
+                "from": "e4",
+                "to": "e6"
+            },
+            {
+                "from": "e4",
+                "to": "e6"
+            },
+            {
+                "from": "e4",
+                "to": "e6"
+            },
+            {
+                "from": "e4",
+                "to": "e6"
+            },
+            {
+                "from": "e4",
+                "to": "e6"
+            },
+            {
+                "from": "e4",
+                "to": "e6"
+            }
+        ]
+    },
+    {
+        "id": "77b41760-2e1a-11ea-9f75-f19bab93d385",
+        "gameName": "jonas game",
+        "players": [
+            {
+                "id": "77b43e70-2e1a-11ea-9f75-f19bab93d385",
+                "playerName": "jonas",
+                "color": "white"
+            }
+        ],
+        "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "history": []
+    },
+    {
+        "id": "c74cfbc0-2e1a-11ea-aaf4-51257a23d595",
+        "gameName": "katlas game",
+        "players": [
+            {
+                "id": "c74d22d0-2e1a-11ea-aaf4-51257a23d595",
+                "playerName": "katla",
+                "color": "white"
+            }
+        ],
+        "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "history": []
+    },
+    {
+        "id": "d4dafc10-2e1a-11ea-a157-cd26fdeb8535",
+        "gameName": "jens game",
+        "players": [
+            {
+                "id": "d4db2320-2e1a-11ea-a157-cd26fdeb8535",
+                "playerName": "jens",
+                "color": "white"
+            }
+        ],
+        "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+        "history": []
+    }
+]
