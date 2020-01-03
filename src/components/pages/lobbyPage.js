@@ -24,6 +24,7 @@ function LobbyPage(props) {
   const startGame = () => {
 
   }
+function LobbyPage() {
   return (
     <section className="subPagesContainer gameListContainer">
       <h1>GameList!</h1>

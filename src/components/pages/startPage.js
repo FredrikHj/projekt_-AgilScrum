@@ -6,6 +6,7 @@ import {
   Link
 } from 'react-router-dom';
 
+<<<<<<< HEAD
 import { updateLocalstorage } from '../localStorage.js';
 import Button from '../Button.js';
 import LobbyPage from './lobbyPage.js';
@@ -26,6 +27,9 @@ function StartPage(props) {
     updateLocalstorage(userNamesStorage);
     setUserName(targetStr);
 }
+=======
+function StartPage() {
+>>>>>>> development
   return (
     <section className="subPagesContainer">
 
@@ -44,4 +48,8 @@ function StartPage(props) {
   );
 }
 
+<<<<<<< HEAD
 export default StartPage;
+=======
+export default StartPage;
+>>>>>>> development
