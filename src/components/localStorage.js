@@ -1,3 +1,3 @@
-export let updateLocalstorage = (userName) =>{
-    localStorage.setItem('userName', userName);
+export let updateLocalstorage = (userNameStr) =>{
+    localStorage.setItem('userName', userNameStr);
 }

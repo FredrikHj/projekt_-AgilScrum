@@ -8,6 +8,10 @@
     flex-direction: row;
     display: flex;
 }
+h1, h2, h3, h4, h5, h6{
+    font-weight: bold;
+    text-align: center;
+}
 .gameListContainer{
     justify-content: none;
     flex-direction: none;
@@ -47,6 +51,17 @@
 .input{
     width: 100px;
 }
-.mordalPopUp{
-    
+
+/* ============= LobyPage ============= */
+.mainLobyPage{
+    display: flex;
+    flex-direction: row;
+}
+.mainLobyPage section{
+    width: 50%;
+}
+.gameNamePart{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
