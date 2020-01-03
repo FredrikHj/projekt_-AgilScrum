@@ -1,3 +1,3 @@
-export let updateLocalstorage = (saveIntoLocalStorage) =>{
-    localStorage.setItem('userData', JSON.parse(saveIntoLocalStorage));
+export let updateLocalstorage = (userName) =>{
+    localStorage.setItem('userName', userName);
 }

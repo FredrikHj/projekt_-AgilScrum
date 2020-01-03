@@ -1,4 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from 'react-router-dom';
+
 import { updateLocalstorage } from '../localStorage.js';
 import Button from '../Button.js';
 import LobbyPage from './lobbyPage.js';
@@ -12,11 +19,7 @@ function StartPage(props) {
     const targetStr = e.target.value;
     console.log(targetStr);
     
-    const userNamesStorage = {
-      player1: targetStr,
-      player2: 'player2'
-    }
-    updateLocalstorage(userNamesStorage);
+    updateLocalstorage(targetStr);
     setUserName(targetStr);
   }
   return (
