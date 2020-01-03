@@ -2,35 +2,45 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ChessBoard from '../ChessBoard/ChessBoard';
 
-function GamePage(props) {
+function GamePage({ match }) {
+  const paramId = match.params.id;
   const [data, setData] = useState({});
-  // const [username, setUsername] = useState('');
+  const [username, setUsername] = useState('');
 
   function getColor() {
-    /* for (const key in data.players) {
-      if (data.players[key].name === username) {
-        return data.players[key].color;
-      }
-    } */
-    return 'white';
+    const currentPlayer = data.players.find((player) => player.playerName === username);
+    return currentPlayer.color;
   }
 
-  function postMove(fen) {
-    const paramId = props.match.params.id;
-    axios.post(`http://localhost:3030/api/game/${paramId}`, { fen })
+  function pollData() {
+    setTimeout(() => {
+      axios.get(`http://emil.nilsson.link/api/game/${paramId}`)
+        .then((res) => {
+          setData(res.data);
+          pollData();
+        });
+    }, 2000);
+  }
+
+  function postMove(fen, from, to) {
+    const payload = {
+      fen,
+      move: { name: username, from, to },
+    };
+    axios.post(`http://emil.nilsson.link/api/game/${paramId}/move`, payload)
       .then(() => {
       });
   }
 
   useEffect(() => {
-    /* const paramId = props.match.params.id;
-    axios.get(`http://localhost:3030/api/game/${paramId}`)
+    // Mock username
+    setUsername(Math.floor(Math.random() * 2) ? 'jonas' : 'Rasmus');
+
+    axios.get(`http://emil.nilsson.link/api/game/${paramId}`)
       .then((res) => {
         setData(res.data);
-      }); */
-    setData({
-      fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
-    });
+        pollData();
+      });
   }, []);
 
   return (

@@ -32,12 +32,13 @@ function ChessBoard({ fenKey, postMove, color }) {
 
   function afterMovePiece(before, after) {
     chessMakeMove(before, after);
-    postMove(chess.fen());
+    postMove(chess.fen(), before, after);
   }
 
   function createChessground() {
     const boardContainer = document.querySelector('.board');
     chess = new Chess();
+    chess.load(fenKey);
     cg = Chessground(boardContainer, {
       movable: {
         events: { after: afterMovePiece },
@@ -48,8 +49,8 @@ function ChessBoard({ fenKey, postMove, color }) {
       coordinates: false,
       orientation: color,
       fen: fenKey,
+      turnColor: chess.turn() === 'w' ? 'white' : 'black',
     });
-    chess.load(fenKey);
   }
 
   useEffect(() => {
