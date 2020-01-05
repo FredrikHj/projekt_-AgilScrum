@@ -4,7 +4,7 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import { StartPage, LobbyPage, GamePage } from '../components';
+import { StartPage, LobbyPage, GamePage } from '../components/pages';
 
 const routes = (
   <Router>
