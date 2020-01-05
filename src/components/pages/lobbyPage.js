@@ -10,7 +10,7 @@ function LobbyPage() {
   useEffect(() => {
     const getUserName = window.localStorage.getItem('userName');
     setUserName(getUserName);
-  });
+  }, []);
   const addNewGame = () => {
     setRunGame(true);
   };
