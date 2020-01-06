@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './gamePage.css';
 import ChessBoard from '../ChessBoard/ChessBoard';
+import PlayerList from '../PlayerList/PlayerList';
+import Chess from 'chess.js';
+
+const chessJs = new Chess();
 
 function GamePage(props) {
   const [data, setData] = useState({});
@@ -15,6 +20,10 @@ function GamePage(props) {
     return 'white';
   }
 
+  function getPlayerTurn() {
+    return chessJs.turn(data.fen) === 'w' ? 'white' : 'black';
+  }
+
   function postMove(fen) {
     const paramId = props.match.params.id;
     axios.post(`http://localhost:3030/api/game/${paramId}`, { fen })
@@ -23,21 +32,22 @@ function GamePage(props) {
   }
 
   useEffect(() => {
-    /* const paramId = props.match.params.id;
-    axios.get(`http://localhost:3030/api/game/${paramId}`)
+    const paramId = props.match.params.id;
+    axios.get(`http://emil.nilsson.link/api/game/${paramId}`)
       .then((res) => {
+        console.log(res.data);
         setData(res.data);
-      }); */
-    setData({
-      fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
-    });
+      });
   }, []);
 
   return (
-    <div className="board-container">
-      { Object.keys(data).length
-        ? <ChessBoard color={getColor()} fenKey={data.fen} postMove={postMove} />
-        : null}
+    <div className="game-container">
+      <PlayerList players={data.players} turn={getPlayerTurn()} />
+      <div className="board-container">
+        { Object.keys(data).length
+          ? <ChessBoard color={getColor()} fenKey={data.fen} postMove={postMove} />
+          : null}
+      </div>
     </div>
   );
 }
