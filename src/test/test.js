@@ -5,8 +5,11 @@ const assert = require('assert');
 const { toDest } = require('../utils/index');
 
 describe('Tests', function () {
-  describe('Frontend = String test', function () {
-    it('runUserName return a string', function () {
+  describe('Frontend', function () {
+    it('LandingPage, runUserName return a string', function () {
+      assert.equal(' ', ' ');
+    });
+    it('GameList,  return a string', function () {
       assert.equal(' ', ' ');
     });
   });

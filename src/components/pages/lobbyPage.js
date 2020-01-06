@@ -5,7 +5,8 @@ const gameListArr = [];
 function LobbyPage() {
   const [userName, setUserName] = useState(false);
   const [gameName, setGameName] = useState(null);
-  let runCom = 0;
+  let [runCom, updateRunCom] = useState(0);
+
   const link = false;
 
   useEffect(() => {
@@ -19,6 +20,7 @@ function LobbyPage() {
     gameListArr.push(gameListBody);
 
     runCom++;
+    updateRunCom(runCom);
   };
   const runGameName = (e) => {
     const targetStr = e.target.value;
@@ -27,17 +29,16 @@ function LobbyPage() {
   console.log(gameListArr);
 
   return (
-    <section className="subPagesContainer gameListContainer">
+    <section className="subPagesContainer removeSomeFlexiPropp">
       <h1>Lobbyn!</h1>
-      <section className="gameListContainer">
-
+      <section>
         <main className="mainLobyPage">
-          <section>
-            <h4>{ userName }</h4>
+          <section className="fillOut50">
+            <h4>{ `UserName: ${userName}` }</h4>
             <hr />
             <GameList />
           </section>
-          <section className="gameNamePart">
+          <section className="fillOut50 gameNamePart">
             <label htmlFor="gameName">
               <h4>
                 Set GameName:
@@ -70,7 +71,7 @@ const GameList = () => {
       {
         gameListArr.map((games) => (
           <>
-            <section className="gameListcontainer">
+            <section className="gameListContainer">
               <div>
                 {`ChessGame: ${games.gameName}`}
               </div>

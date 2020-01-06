@@ -1,9 +1,9 @@
-/* *{
+*{
     border: 1px solid red;
-} */
+}
 .subPagesContainer{
-    margin-left: calc(50% - 300px);
-    width: 600px;
+    margin-left: calc(50% - 400px);
+    width: 800px;
     justify-content: space-between;
     flex-direction: row;
     display: flex;
@@ -12,11 +12,7 @@ h1, h2, h3, h4, h5, h6{
     font-weight: bold;
     text-align: center;
 }
-.gameListContainer{
-    justify-content: none;
-    flex-direction: none;
-    display: block;
-}
+
 .userNameContainer{
     width: 230px;
     display: flex;
@@ -53,11 +49,30 @@ h1, h2, h3, h4, h5, h6{
 }
 
 /* ============= LobyPage ============= */
+.removeSomeFlexiPropp{
+    justify-content: none;
+    flex-direction: none;
+    display: block;
+}
+.gameListContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.gameListContainer div{
+    width: 50%;
+}
 .mainLobyPage{
     display: flex;
     flex-direction: row;
 }
-.mainLobyPage section{
+.mainLobyPage{
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: row;
+    display: flex;
+}
+.fillOut50{
     width: 50%;
 }
 .gameNamePart{
