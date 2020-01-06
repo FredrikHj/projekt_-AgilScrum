@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './gamePage.css';
+import Chess from 'chess.js';
 import ChessBoard from '../ChessBoard/ChessBoard';
 import PlayerList from '../PlayerList/PlayerList';
-import Chess from 'chess.js';
 
 const chessJs = new Chess();
 
@@ -35,7 +35,6 @@ function GamePage(props) {
     const paramId = props.match.params.id;
     axios.get(`http://emil.nilsson.link/api/game/${paramId}`)
       .then((res) => {
-        console.log(res.data);
         setData(res.data);
       });
   }, []);
