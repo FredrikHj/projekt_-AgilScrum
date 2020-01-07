@@ -1,1 +1,28 @@
-[{"id":"027895f0-309c-11ea-92b4-b595d8454b58","gameName":"EPIC GAME","players":[{"id":"027895f1-309c-11ea-92b4-b595d8454b58","playerName":"Katla","color":"white"}],"fen":"test","history":[{"to":"e4","from":"e6"},{"to":"e4","from":"e6"}]},{"id":"07d7b530-309c-11ea-a3c6-c768cb1dc8b4","gameName":"EPIC GAME","players":[{"id":"07d7dc40-309c-11ea-a3c6-c768cb1dc8b4","playerName":"Katla","color":"white"}],"fen":"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1","history":[]}]
+[
+  {
+    "id": "2bba8582-316a-11ea-b1e7-85aa5cafd354",
+    "gameName": "katla-3s game",
+    "players": [
+      {
+        "id": "2bba8583-316a-11ea-b1e7-85aa5cafd354",
+        "playerName": "katla-3",
+        "color": "white"
+      }
+    ],
+    "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+    "history": []
+  },
+  {
+    "id": "55c2ddf0-316a-11ea-8985-e5daa34a9736",
+    "gameName": "EPIC GAME",
+    "players": [
+      {
+        "id": "55c30500-316a-11ea-8985-e5daa34a9736",
+        "playerName": "Katla",
+        "color": "white"
+      }
+    ],
+    "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+    "history": []
+  }
+]

@@ -6,22 +6,10 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 const uuid = require('uuid/v1');
 
-let games = [{
-  "id": "fe655ef0-315c-11ea-9ab4-158b2bc2065d",
-  "gameName": "EPIC GAME",
-  "players": [
-    {
-      "id": "fe658600-315c-11ea-9ab4-158b2bc2065d",
-      "playerName": "Katla",
-      "color": "white"
-    }
-  ],
-  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
-  "history": []
-}];
+let games = [];
 
 app.listen(PORT, () => {
-  fs.readFile('./server/games.json', (err, data) => {
+  fs.readFile('./server/games.json', 'utf8', (err, data) => {
     if (err) throw err;
     games = JSON.parse(data);
   });
@@ -63,7 +51,6 @@ app.post('/api/lobby', (req, res) => {
       fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
       history: []
     };
-
     games.push(game);
     fs.writeFile('./server/games.json', JSON.stringify(games), err => {
       if (err) throw err;
