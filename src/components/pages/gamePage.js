@@ -4,8 +4,9 @@ import './gamePage.css';
 import Chess from 'chess.js';
 import ChessBoard from '../ChessBoard/ChessBoard';
 import PlayerList from '../PlayerList/PlayerList';
-const chessJs = new Chess();
 import Modal from '../Modal/Modal';
+
+const chessJs = new Chess();
 
 
 function GamePage(props) {
