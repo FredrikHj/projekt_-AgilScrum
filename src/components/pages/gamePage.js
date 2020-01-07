@@ -56,6 +56,9 @@ function GamePage({ match }) {
   }
 
   function getPlayerTurn() {
+    if (data.fen) {
+      chessJs.load(data.fen);
+    }
     return chessJs.turn(data.fen) === 'w' ? 'white' : 'black';
   }
 
@@ -66,7 +69,9 @@ function GamePage({ match }) {
     };
     axios.post(`${baseUrl}api/game/${paramId}/move`, payload)
       .then((res) => {
-        if (res.status < 200 || res.status >= 300) {
+        if (res.status >= 200 && res.status < 300) {
+          setData(res.data);
+        } else {
           throw res;
         }
       })

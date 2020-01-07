@@ -5,10 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getTurnColor } from '../../utils';
 
 function PlayerList({ players, turn }) {
-  /* function getTurnColor(playerColor) {
-    return turn === playerColor ? '#ffb048' : 'lightgray';
-  } */
-
   return (
     <div className="player-list__container">
       <ul className="player-list__list">
