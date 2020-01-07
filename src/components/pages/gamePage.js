@@ -3,7 +3,7 @@ import axios from 'axios';
 import ChessBoard from '../ChessBoard/ChessBoard';
 import { baseUrl } from '../../Config';
 import Modal from '../Modal/Modal';
-
+import { getColor } from '../../utils';
 
 function GamePage({ match }) {
   const paramId = match.params.id;
@@ -35,16 +35,16 @@ function GamePage({ match }) {
     setShowWinnerModal(false);
   }
 
-  function getColor() {
-    const currentPlayer = data.players.find((player) => player.playerName === username);
-    return currentPlayer.color;
-  }
-
   function pollData() {
     setTimeout(() => {
       axios.get(`${baseUrl}api/game/${paramId}`)
         .then((res) => {
-          setData(res.data);
+          if (res.status >= 200 && res.status < 300) {
+            setData(res.data);
+            pollData();
+          }
+        })
+        .catch(() => {
           pollData();
         });
     }, 2000);
@@ -56,7 +56,13 @@ function GamePage({ match }) {
       move: { name: username, from, to },
     };
     axios.post(`${baseUrl}api/game/${paramId}/move`, payload)
-      .then(() => {
+      .then((res) => {
+        if (res.status < 200 || res.status >= 300) {
+          throw res;
+        }
+      })
+      .catch(() => {
+
       });
   }
 
@@ -66,7 +72,12 @@ function GamePage({ match }) {
 
     axios.get(`${baseUrl}api/game/${paramId}`)
       .then((res) => {
-        setData(res.data);
+        if (res.status >= 200 && res.status < 300) {
+          setData(res.data);
+          pollData();
+        }
+      })
+      .catch(() => {
         pollData();
       });
   }, []);
@@ -76,7 +87,7 @@ function GamePage({ match }) {
       <Modal title={isWinner ? 'Winner' : 'Loser'} content={gameResultContent()} show={showWinnerModal} close={closeWinnerModal} />
       <div className="board-container">
         { Object.keys(data).length
-          ? <ChessBoard color={getColor()} fenKey={data.fen} postMove={postMove} />
+          ? <ChessBoard color={getColor(data, username)} fenKey={data.fen} postMove={postMove} />
           : null}
       </div>
     </>

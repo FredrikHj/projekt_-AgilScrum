@@ -10,4 +10,10 @@ const toDest = (validMoves) => {
   return rv;
 };
 
+const getColor = (data, username) => {
+  const currentPlayer = data.players.find((player) => player.playerName === username);
+  return currentPlayer ? currentPlayer.color : undefined;
+};
+
 module.exports.toDest = toDest;
+module.exports.getColor = getColor;
