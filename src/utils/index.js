@@ -10,4 +10,7 @@ const toDest = (validMoves) => {
   return rv;
 };
 
+const getTurnColor = (playerColor, turn) => (turn === playerColor ? '#ffb048' : '#ccc');
+
+module.exports.getTurnColor = getTurnColor;
 module.exports.toDest = toDest;
