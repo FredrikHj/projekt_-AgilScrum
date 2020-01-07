@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ChessBoard from '../ChessBoard/ChessBoard';
+import { baseUrl } from '../../Config';
 import Modal from '../Modal/Modal';
+import { getColor } from '../../utils';
 
-
-function GamePage(props) {
+function GamePage({ match }) {
+  const paramId = match.params.id;
   const [data, setData] = useState({});
+  const [username, setUsername] = useState('');
   const [showWinnerModal, setShowWinnerModal] = useState(false);
   const [isWinner] = useState(true);
-  // const [username, setUsername] = useState('');
+
 
   function gameResultContent() {
     if (isWinner) {
@@ -32,31 +35,51 @@ function GamePage(props) {
     setShowWinnerModal(false);
   }
 
-  function getColor() {
-    /* for (const key in data.players) {
-      if (data.players[key].name === username) {
-        return data.players[key].color;
-      }
-    } */
-    return 'white';
+  function pollData() {
+    setTimeout(() => {
+      axios.get(`${baseUrl}api/game/${paramId}`)
+        .then((res) => {
+          if (res.status >= 200 && res.status < 300) {
+            setData(res.data);
+            pollData();
+          }
+        })
+        .catch(() => {
+          pollData();
+        });
+    }, 2000);
   }
 
-  function postMove(fen) {
-    const paramId = props.match.params.id;
-    axios.post(`http://localhost:3030/api/game/${paramId}`, { fen })
-      .then(() => {
+  function postMove(fen, from, to) {
+    const payload = {
+      fen,
+      move: { name: username, from, to },
+    };
+    axios.post(`${baseUrl}api/game/${paramId}/move`, payload)
+      .then((res) => {
+        if (res.status < 200 || res.status >= 300) {
+          throw res;
+        }
+      })
+      .catch(() => {
+
       });
   }
 
   useEffect(() => {
-    /* const paramId = props.match.params.id;
-    axios.get(`http://localhost:3030/api/game/${paramId}`)
+    // Mock username
+    setUsername(Math.floor(Math.random() * 2) ? 'jonas' : 'Rasmus');
+
+    axios.get(`${baseUrl}api/game/${paramId}`)
       .then((res) => {
-        setData(res.data);
-      }); */
-    setData({
-      fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
-    });
+        if (res.status >= 200 && res.status < 300) {
+          setData(res.data);
+          pollData();
+        }
+      })
+      .catch(() => {
+        pollData();
+      });
   }, []);
 
   return (
@@ -64,7 +87,7 @@ function GamePage(props) {
       <Modal title={isWinner ? 'Winner' : 'Loser'} content={gameResultContent()} show={showWinnerModal} close={closeWinnerModal} />
       <div className="board-container">
         { Object.keys(data).length
-          ? <ChessBoard color={getColor()} fenKey={data.fen} postMove={postMove} />
+          ? <ChessBoard color={getColor(data, username)} fenKey={data.fen} postMove={postMove} />
           : null}
       </div>
     </>
