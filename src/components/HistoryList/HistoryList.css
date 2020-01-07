@@ -31,18 +31,6 @@
     transform: translate(0, 0);
 }
 
-.history-list__slide-enter-done {
-
-}
-
-.history-list__slide-exit {
-
-}
-
-.history-list__slide-active {
-
-}
-
 .history-list__list-item:nth-child(2n) {
     background-color: #f7f7f7;
 }
