@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ChessBoard from '../ChessBoard/ChessBoard';
+import { baseUrl } from '../../Config';
+
 
 function GamePage({ match }) {
   const paramId = match.params.id;
@@ -14,7 +16,7 @@ function GamePage({ match }) {
 
   function pollData() {
     setTimeout(() => {
-      axios.get(`http://emil.nilsson.link/api/game/${paramId}`)
+      axios.get(`${baseUrl}api/game/${paramId}`)
         .then((res) => {
           setData(res.data);
           pollData();
@@ -27,7 +29,7 @@ function GamePage({ match }) {
       fen,
       move: { name: username, from, to },
     };
-    axios.post(`http://emil.nilsson.link/api/game/${paramId}/move`, payload)
+    axios.post(`${baseUrl}api/game/${paramId}/move`, payload)
       .then(() => {
       });
   }
@@ -36,7 +38,7 @@ function GamePage({ match }) {
     // Mock username
     setUsername(Math.floor(Math.random() * 2) ? 'jonas' : 'Rasmus');
 
-    axios.get(`http://emil.nilsson.link/api/game/${paramId}`)
+    axios.get(`${baseUrl}api/game/${paramId}`)
       .then((res) => {
         setData(res.data);
         pollData();
