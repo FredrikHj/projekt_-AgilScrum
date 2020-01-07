@@ -8,12 +8,6 @@ const uuid = require('uuid/v1');
 
 let games = [];
 
-
-function updateGames(newGames) {
-  //update games to newGames
-  //write file
-}
-
 app.listen(PORT, () => {
   fs.readFile('./server/games.json', (err, data) => {
     if (err) throw err;
@@ -79,13 +73,9 @@ app.delete('/api/lobby', (req, res) => {
 });
 
 app.get('/api/game/:id', (req, res) => {
-  let g = {}
-
-  for (let game of games) {
-    if (game.id === req.params.id) {
-      g = game
-    }
-  }
+  const g = games.filter((game) => {
+    return game.id === req.params.id
+  })[0] || {}
 
   if (!Object.entries(g).length) {
     res.status(404).send({ error: 'game could not be found!' });
@@ -94,12 +84,6 @@ app.get('/api/game/:id', (req, res) => {
 
   res.status(200).send(g);
 });
-/*
-newMove = {
-  fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
-  move: "{name:"jonas" to: "e4", from: "e6"}"
-}
-*/
 
 app.post('/api/game/:id/move', (req, res) => {
   let g = {}
@@ -128,14 +112,6 @@ app.post('/api/game/:id/move', (req, res) => {
   });
 
   res.status(200).send(g);
-})
-
-app.delete(() => {
-  /*
-    when leaving game check players []
-    if < 2, remove game
-    also be called when game ends (game over)
-  */
 })
 
 module.exports = app;
