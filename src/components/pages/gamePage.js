@@ -5,7 +5,6 @@ import { baseUrl } from '../../Config';
 import Modal from '../Modal/Modal';
 
 
-
 function GamePage({ match }) {
   const paramId = match.params.id;
   const [data, setData] = useState({});
