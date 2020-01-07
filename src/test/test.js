@@ -2,7 +2,7 @@
 /* eslint-disable prefer-arrow-callback, func-names */
 
 const assert = require('assert');
-const { toDest, getColor } = require('../utils/index');
+const { toDest, getTurnColor, getColor } = require('../utils/index');
 
 describe('Tests', function () {
   describe('toDest function', function () {
@@ -51,6 +51,17 @@ describe('Tests', function () {
         c2: ['c3', 'c4'],
       };
       assert.deepStrictEqual(toDest(data), expected);
+    });
+  });
+  describe('getTurnColor function', function () {
+    const playerColor = 'white';
+    let turnColor = 'white';
+    it('Should return golden color (#ffb048) if data does match', function () {
+      assert.strictEqual(getTurnColor(playerColor, turnColor), '#ffb048');
+    });
+    it('Should return grayish color (#ccc) if data does not match', function () {
+      turnColor = 'black';
+      assert.strictEqual(getTurnColor(playerColor, turnColor), '#ccc');
     });
   });
   describe('getColor function', function () {

@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './gamePage.css';
+import Chess from 'chess.js';
 import ChessBoard from '../ChessBoard/ChessBoard';
+import PlayerList from '../PlayerList/PlayerList';
 import { baseUrl } from '../../Config';
 import Modal from '../Modal/Modal';
 import { getColor } from '../../utils';
+
+const chessJs = new Chess();
 
 function GamePage({ match }) {
   const paramId = match.params.id;
@@ -50,6 +55,13 @@ function GamePage({ match }) {
     }, 2000);
   }
 
+  function getPlayerTurn() {
+    if (data.fen) {
+      chessJs.load(data.fen);
+    }
+    return chessJs.turn(data.fen) === 'w' ? 'white' : 'black';
+  }
+
   function postMove(fen, from, to) {
     const payload = {
       fen,
@@ -57,7 +69,9 @@ function GamePage({ match }) {
     };
     axios.post(`${baseUrl}api/game/${paramId}/move`, payload)
       .then((res) => {
-        if (res.status < 200 || res.status >= 300) {
+        if (res.status >= 200 && res.status < 300) {
+          setData(res.data);
+        } else {
           throw res;
         }
       })
@@ -83,15 +97,16 @@ function GamePage({ match }) {
   }, []);
 
   return (
-    <>
+    <div className="game-container">
+      <PlayerList players={data.players} turn={getPlayerTurn()} />
       <Modal title={isWinner ? 'Winner' : 'Loser'} content={gameResultContent()} show={showWinnerModal} close={closeWinnerModal} />
+
       <div className="board-container">
         { Object.keys(data).length
           ? <ChessBoard color={getColor(data, username)} fenKey={data.fen} postMove={postMove} />
           : null}
       </div>
-    </>
-
+    </div>
   );
 }
 

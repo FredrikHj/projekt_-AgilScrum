@@ -10,6 +10,8 @@ const toDest = (validMoves) => {
   return rv;
 };
 
+const getTurnColor = (playerColor, turn) => (turn === playerColor ? '#ffb048' : '#ccc');
+
 const getColor = (data, username) => {
   const currentPlayer = data.players.find((player) => player.playerName === username);
   return currentPlayer ? currentPlayer.color : undefined;
@@ -17,3 +19,4 @@ const getColor = (data, username) => {
 
 module.exports.toDest = toDest;
 module.exports.getColor = getColor;
+module.exports.getTurnColor = getTurnColor;
