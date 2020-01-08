@@ -1,10 +1,17 @@
-import { configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+/* import React from 'react';
+import ReactDOM from 'react-dom'; */
+import TestC from './TestC';
+console.log(TestC);
 
-configure({ adapter: new Adapter() });
+/* 
+const sum = require('./sum');
 
-import { shallow, mount, render } from 'enzyme';
-
-const wrapper = shallow();
-
-console.log(wrapper);
+test('adds 1 + 2 to equal 3', () => {
+  expect(sum(1, 2)).toBe(3);
+}); */
+/* it('Renders without crashing', function () {
+  const div = document.createElement('div');
+  ReactDOM.render(<TestC />, div);
+  ReactDOM.unmountComponentAtNode(div);
+});
+ */

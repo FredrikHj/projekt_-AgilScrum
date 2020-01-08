@@ -1,10 +1,17 @@
 /* eslint-env mocha */
 /* eslint-disable prefer-arrow-callback, func-names */
-
 const assert = require('assert');
 const { toDest } = require('../utils/index');
 
+
 describe('Tests', function () {
+  describe('<App />', () => {
+    it('renders three <App /> components', () => {
+      const wrapper = shallow(<App />);
+        console.log(wrapper);
+        
+    });
+  });
   describe('toDest function', function () {
     let data;
     let expected;
