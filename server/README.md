@@ -1,9 +1,9 @@
 # API endpoints
 
-### GET /api/lobby
+## GET /api/lobby
 Returns all active games
 
-##### Responses
+### Responses
 
 **200**
 ###### Example
@@ -27,7 +27,7 @@ Returns all active games
 
 <br/>
 
-### POST /api/lobby
+## POST /api/lobby
 Creates a new game
 
 #### Parameters
@@ -44,11 +44,11 @@ Creates a new game
 }
 ```
 
-##### Responses
+### Responses
 
 **201** - successful operation
 
-###### Example
+#### Example
 
 ```JSON
 {
@@ -72,16 +72,16 @@ Creates a new game
 <br/>
 
 
-### GET /api/game/:id
+## GET /api/game/:id
 Returns all data for a specified game
 
-##### Parameters
+### Parameters
 
 **id** - ID of game that you want data from
 
 <br/>
 
-##### Responses
+### Responses
 
 **200** - successful operation
 
@@ -91,16 +91,16 @@ Returns all data for a specified game
 
 
 
-### DELETE /api/game/:id
+## DELETE /api/game/:id
 Deletes the specified game
 
-##### Parameters
+### Parameters
 
 **id** - ID of game that you want to delete
 
 <br/>
 
-##### Responses
+### Responses
 
 **200** - successful operation
 
@@ -108,10 +108,10 @@ Deletes the specified game
 
 <br/>
 
-### POST /api/game/:id/join
+## POST /api/game/:id/join
 Used to join a specific game
 
-##### Parameters
+### Parameters
 
 **id** - ID of game that you want to join
 
@@ -124,7 +124,7 @@ Used to join a specific game
 }
 ```
 
-##### Responses
+### Responses
 
 **200** - successful operation
 
@@ -152,10 +152,10 @@ Used to join a specific game
 
 
 
-### POST /api/game/:id/move
+## POST /api/game/:id/move
 Used to make a move on the chessboard in the specified game
 
-##### Parameters
+### Parameters
 
 **id** - ID of game game where the player makes a move
 
@@ -171,14 +171,8 @@ Used to make a move on the chessboard in the specified game
 ```
 
 
-##### Responses
+### Responses
 
 **200** - successful operation
 
 **400** - missing parameters
-
-
-
-
-
-
