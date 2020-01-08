@@ -67,3 +67,30 @@ Implementerat **GET /api/lobby** & **POST /api/lobby** för att lista alla rum s
 * POST /api/game/:id/join - gå med i ett spel
 * Tester för dessa endpoints
 
+
+## Sprint review
+
+<br/>
+
+**Backenddelen** : Helt klar, med reservation för att fixa buggar. 
+
+**Frontenddelen** : Inte helt klar. 
+Vi har följande kvar:
+* Att rendera ut aktivar spel och att användare ska kunna gå med i ett spel
+* Hantera speldraget "shack"
+* Hantera om spelare "ger upp" eller lämnar
+* Tester 
+
+**Tester**: Fredrik fortsätter med tester till nästa sprint då han inte blev klar till denna sprint.
+
+**Lista aktva spel & gå med i spel**: Dessa Issues blev inte klara för testerna drog ut på tiden. Fredrik fortsätter med tester. Emil och Jonas tar över dessa issues.
+
+**Färdigt issues** : Resterande Issues blev klara.  
+
+### Retrospektiv
+
+Fredrik tyckte han skulle ha vara mer uppmärksam på lektionerna som handlade om tester.
+
+Rasmus tyckte att han kunde ha förbättrat sin kodstruktur.
+
+Emil och Jonas som har jobbat med servern, tyckte att de kunde ha gjort fler utförliga tester.
