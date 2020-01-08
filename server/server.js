@@ -83,7 +83,7 @@ app.delete('/api/game/:id', (req, res) => {
   })
 
   if (gamesCopy.length === games.length) {
-    res.status(400).send({ error: 'game could not be found!' });
+    res.status(404).send({ error: 'game could not be found!' });
     return;
   }
 
