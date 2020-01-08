@@ -3,8 +3,6 @@
 ### GET /api/lobby
 Returns all active games
 
-<br/>
-
 ##### Responses
 
 **200**
@@ -31,8 +29,6 @@ Returns all active games
 
 ### POST /api/lobby
 Creates a new game
-
-<br/>
 
 #### Parameters
 
@@ -79,8 +75,6 @@ Creates a new game
 ### GET /api/game/:id
 Returns all data for a specified game
 
-<br/>
-
 ##### Parameters
 
 **id** - ID of game that you want data from
@@ -100,8 +94,6 @@ Returns all data for a specified game
 ### DELETE /api/game/:id
 Deletes the specified game
 
-<br/>
-
 ##### Parameters
 
 **id** - ID of game that you want to delete
@@ -110,18 +102,14 @@ Deletes the specified game
 
 ##### Responses
 
-<br/>
-
 **200** - successful operation
 
 **404** - game not found
 
-### POST /api/game/:id/join
-Used to join a specific game
-
 <br/>
 
-
+### POST /api/game/:id/join
+Used to join a specific game
 
 ##### Parameters
 
@@ -166,8 +154,6 @@ Used to join a specific game
 
 ### POST /api/game/:id/move
 Used to make a move on the chessboard in the specified game
-
-<br/>
 
 ##### Parameters
 
