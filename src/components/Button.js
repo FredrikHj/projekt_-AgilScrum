@@ -1,3 +1,5 @@
+/* eslint-disable react/button-has-type */
+
 import React from 'react';
 import {
   Link,
@@ -5,18 +7,18 @@ import {
 
 const Button = (props) => {
   const {
-    patchLink, patchTo, name, bFunction,
+    patchLink, patchTo, name, bFunction, type,
   } = props;
   return (
     <>
       {(patchLink === true)
         ? (
           <Link to={patchTo}>
-            <button type="button" className="button">{ name }</button>
+            <button type={type} className="button">{name}</button>
           </Link>
         )
 
-        : <button type="button" className="button" onClick={bFunction}>{ name }</button>}
+        : <button type={type} className="button" onClick={bFunction}>{name}</button>}
     </>
   );
 };
