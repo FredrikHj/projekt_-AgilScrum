@@ -1,0 +1,67 @@
+/* *{
+    border: 1px solid red;
+} */
+.subPagesContainer{
+    margin-left: calc(50% - 300px);
+    width: 600px;
+    justify-content: space-between;
+    flex-direction: row;
+    display: flex;
+}
+h1, h2, h3, h4, h5, h6{
+    font-weight: bold;
+    text-align: center;
+}
+.gameListContainer{
+    justify-content: none;
+    flex-direction: none;
+    display: block;
+}
+.userNameContainer{
+    width: 230px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: #2ba6cb;
+    border-radius: 3px;
+    border: 1px solid #1e728c;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 15px 5px 0 0;
+    padding: 10px 15px;
+}
+/* Components */
+.button{
+    background: #2ba6cb;
+    border-radius: 3px;
+    border: 1px solid #1e728c;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 15px 5px 0 0;
+    outline: none;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+}
+.input{
+    width: 100px;
+}
+
+/* ============= LobyPage ============= */
+.mainLobyPage{
+    display: flex;
+    flex-direction: row;
+}
+.mainLobyPage section{
+    width: 50%;
+}
+.gameNamePart{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
