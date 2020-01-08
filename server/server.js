@@ -171,7 +171,7 @@ app.post('/api/game/:id/join', (req, res) => {
       }
     }
   }
-  res.status(400).send({ error: 'game could not be found...' });
+  res.status(404).send({ error: 'game could not be found...' });
 })
 
 module.exports = app;
