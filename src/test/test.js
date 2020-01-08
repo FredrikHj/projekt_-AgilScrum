@@ -5,11 +5,6 @@ const assert = require('assert');
 const { toDest } = require('../utils/index');
 
 describe('Tests', function () {
-  describe('Frontend = String test', function () {
-    it('runUserName return a string', function () {
-      assert.equal(' ', ' ');
-    });
-  });
   describe('toDest function', function () {
     let data;
     let expected;
