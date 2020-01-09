@@ -4,6 +4,7 @@ import axios from 'axios';
 import './GameCreation.css';
 import Button from '../Button/Button';
 import { baseUrl } from '../../Config';
+import Modal from '../Modal/Modal';
 
 function GameCreation({ playerName }) {
   const [error, setError] = useState('');
@@ -45,7 +46,7 @@ function GameCreation({ playerName }) {
           <input name="game" id="name" className="input-name" />
           <Button type="submit" name="Create game" />
           {
-            error && (<div className="label-error">{error}</div>)
+            error && (<Modal show title="Could not create game" content="Perhaps you're missing a game name?" close={() => setError('')} />)
           }
         </form>
       </div>

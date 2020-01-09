@@ -9,39 +9,39 @@ function LobbyPage() {
   const [userName, setUserName] = useState(false);
   const [data, setData] = useState([]);
 
-  function pollData() {
+  function pollData(path) {
+    if (window.location.pathname !== path) return;
     setTimeout(() => {
       axios.get(`${baseUrl}api/lobby`)
         .then((res) => {
           if (res.status >= 200 && res.status < 300) {
             setData(res.data);
-            pollData();
+            pollData('/lobby');
           }
         })
         .catch(() => {
-          pollData();
+          pollData('/lobby');
         });
     }, 2000);
   }
 
   useEffect(() => {
     setUserName(localStorage.getItem('userName'));
-
     axios.get(`${baseUrl}api/lobby`)
       .then((res) => {
         if (res.status >= 200 && res.status < 300) {
           setData(res.data);
-          pollData();
+          pollData('/lobby');
         }
       })
       .catch(() => {
-        pollData();
+        pollData('/lobby');
       });
   }, []);
 
   return (
     <div className="lobby-container">
-      <GameList games={data} />
+      <GameList games={data} playerName={userName} />
       <GameCreation playerName={userName} />
     </div>
   );
