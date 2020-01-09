@@ -1,10 +1,14 @@
-import React from 'react';
-import './GameCreation.css';
+import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import Button from '../Button';
+import './GameCreation.css';
+import Button from '../Button/Button';
 import { baseUrl } from '../../Config';
 
 function GameCreation({ playerName }) {
+  const [error, setError] = useState('');
+  const [redirect, setRedirect] = useState('');
+
   function createGame(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -17,30 +21,34 @@ function GameCreation({ playerName }) {
     })
       .then((res) => {
         if (res.status === 201) {
-          // res
-          // redirect here
+          setRedirect(res.data.id);
         }
       })
       .catch(() => {
-        // err.response
+        setError('Something went wrong, try again!');
       });
   }
 
   return (
     <div className="gamecreation-container">
-      <div className="user-container">
-        <p className="user-name">
-          Logged in as
-          {playerName}
-        </p>
+      {
+        redirect && (<Redirect to={`/game/${redirect}`} />)
+      }
+      <div className="header-container">
+        <p className="header-label">Create a game</p>
       </div>
-      <form onSubmit={(e) => createGame(e)}>
-        <div className="label-name">
-          Game name
-        </div>
-        <input name="game" id="name" className="input-name" />
-        <Button type="submit" name="Create game" />
-      </form>
+      <div className="form-container">
+        <form onSubmit={(e) => createGame(e)}>
+          <div className="label-name">
+            Game name
+          </div>
+          <input name="game" id="name" className="input-name" />
+          <Button type="submit" name="Create game" />
+          {
+            error && (<div className="label-error">{error}</div>)
+          }
+        </form>
+      </div>
     </div>
   );
 }
