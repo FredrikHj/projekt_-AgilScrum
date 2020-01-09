@@ -45,8 +45,10 @@ function GameList({ games, playerName }) {
               onClick={() => {
                 joinGame(game.id);
               }}
-              onKeyUp={() => {
-                joinGame(game.id);
+              onKeyUp={(e) => {
+                if (e.keyCode === 13) {
+                  joinGame(game.id);
+                }
               }}
               role="button"
               tabIndex="0"

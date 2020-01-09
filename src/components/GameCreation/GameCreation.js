@@ -12,7 +12,6 @@ function GameCreation({ playerName }) {
 
   function createGame(e) {
     e.preventDefault();
-    e.stopPropagation();
 
     const gameName = e.target.children[1].value;
 
