@@ -94,3 +94,24 @@ Fredrik tyckte han skulle ha vara mer uppmärksam på lektionerna som handlade o
 Rasmus tyckte att han kunde ha förbättrat sin kodstruktur.
 
 Emil och Jonas som har jobbat med servern, tyckte att de kunde ha gjort fler utförliga tester.
+
+## Sprint 3 (2020-01-08 - 2020-01-13)
+> Scrum master: Rasmus & Fredrik
+
+## Sprint plan
+
+### Frontend
+* Landing page
+    * Lite mer styling
+
+* Lobby page
+    * Skriva tester
+
+* Game page
+    * Hantering av (game_over) schack matt
+    * Hantering när spelare lämnar spelet
+    * Kopplingen vid join av game
+    * Skriva tester
+
+### Backend
+Allt ska vara färdigt, om inte buggar hittas
