@@ -18,7 +18,7 @@ function ChessBoard({ fenKey, postMove, color }) {
   }
 
   function inCheck() {
-    if(chess.in_check()) cg.set({check: true});
+    if (chess.in_check()) cg.set({ check: true });
   }
 
   function chessMakeMove(from, to) {
@@ -30,8 +30,8 @@ function ChessBoard({ fenKey, postMove, color }) {
     if (chess.in_checkmate()) {
       // DO WHEN CHECKMATE
     }
-      // DO WHEN CHECK
-      inCheck();
+    // DO WHEN CHECK
+    inCheck();
   }
 
   function afterMovePiece(before, after) {
@@ -69,7 +69,7 @@ function ChessBoard({ fenKey, postMove, color }) {
         movable: {
           dests: toDest(chess.moves({ verbose: true })),
         },
-        check: false
+        check: false,
       });
       inCheck();
     }
