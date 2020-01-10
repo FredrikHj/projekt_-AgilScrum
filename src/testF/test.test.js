@@ -14,8 +14,10 @@ describe('StartPage test', function () {
     const wrapper = shallow(<StartPage />);
     expect(wrapper.find('.inputUsername').length).toBe(1);
   });
-  it('Renders three <Lobby/> class = lobby-container inclusive 2 children components', function () {
+  it('Render three <Lobby/> class = lobby-container inclusive 2 children components, named: GameList and GameCreation', function () {
     const wrapper = shallow(<LobbyPage />);
     expect(wrapper.find('.lobby-container').children().length).toBe(2);
-   });
+    expect(wrapper.find('Gamelist'));
+    expect(wrapper.find('GameCreation'));
+  });
 });
