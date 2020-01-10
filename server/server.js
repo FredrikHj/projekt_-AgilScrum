@@ -16,8 +16,14 @@ app.listen(PORT, () => {
   console.log(`Listening on ${PORT}`);
 });
 
-app.use(bodyParser.json());
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', "*");
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 
+app.use(bodyParser.json());
 
 app.get('/api/lobby', (req, res) => {
   res.status(200).send(games);
@@ -65,5 +71,47 @@ app.delete('/api/lobby', (req, res) => {
   });
   res.status(200).send('games deleted!');
 });
+
+app.get('/api/game/:id', (req, res) => {
+  const g = games.filter((game) => {
+    return game.id === req.params.id
+  })[0] || {}
+
+  if (!Object.entries(g).length) {
+    res.status(404).send({ error: 'game could not be found!' });
+    return;
+  }
+
+  res.status(200).send(g);
+});
+
+app.post('/api/game/:id/move', (req, res) => {
+  let g = {}
+  let newMove = req.body;
+
+  if (!newMove.fen || !newMove.move) {
+    res.status(400).send({ error: 'fen key or move is missing!' })
+    return;
+  }
+
+  for (let game of games) {
+    if (game.id === req.params.id) {
+      game.fen = newMove.fen;
+      game.history.push(newMove.move);
+      g = game;
+    }
+  }
+
+  if (!Object.entries(g).length) {
+    res.status(404).send({ error: 'something went wrong...' });
+    return;
+  }
+
+  fs.writeFile('./server/games.json', JSON.stringify(games), err => {
+    if (err) throw err;
+  });
+
+  res.status(200).send(g);
+})
 
 module.exports = app;

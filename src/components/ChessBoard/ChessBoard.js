@@ -8,7 +8,9 @@ import { toDest } from '../../utils';
 let cg = null;
 let chess = null;
 
-function ChessBoard({ fenKey, postMove, color }) {
+function ChessBoard({
+  fenKey, postMove, color, promotePiece,
+}) {
   function checkPromotion(from, to) {
     const validMoves = chess.moves({ square: from, verbose: true });
     const idx = validMoves.findIndex(
@@ -17,27 +19,45 @@ function ChessBoard({ fenKey, postMove, color }) {
     return idx !== -1;
   }
 
+  function inCheck() {
+    if (chess.in_check()) cg.set({ check: true });
+  }
+
   function chessMakeMove(from, to) {
-    if (checkPromotion(from, to)) {
-      // DO WHEN PROMOTING
-      chess.put({ type: 'q', color: 'w' }, from);
-    }
-    chess.move({ from, to });
-    if (chess.in_checkmate()) {
-      // DO WHEN CHECKMATE
-    } else if (chess.in_check()) {
+    return new Promise((resolve) => {
+      if (checkPromotion(from, to)) {
+        // DO WHEN PROMOTING
+        promotePiece(color)
+          .then((val) => {
+            chess.move({ from, to, promotion: val });
+            cg.set({
+              fen: chess.fen(),
+            });
+            resolve();
+          });
+      } else {
+        chess.move({ from, to });
+        resolve();
+      }
+      if (chess.in_checkmate()) {
+        // DO WHEN CHECKMATE
+      }
       // DO WHEN CHECK
-    }
+      inCheck();
+    });
   }
 
   function afterMovePiece(before, after) {
-    chessMakeMove(before, after);
-    postMove(chess.fen());
+    chessMakeMove(before, after)
+      .then(() => {
+        postMove(chess.fen(), before, after);
+      });
   }
 
   function createChessground() {
     const boardContainer = document.querySelector('.board');
     chess = new Chess();
+    chess.load(fenKey);
     cg = Chessground(boardContainer, {
       movable: {
         events: { after: afterMovePiece },
@@ -48,8 +68,8 @@ function ChessBoard({ fenKey, postMove, color }) {
       coordinates: false,
       orientation: color,
       fen: fenKey,
+      turnColor: chess.turn() === 'w' ? 'white' : 'black',
     });
-    chess.load(fenKey);
   }
 
   useEffect(() => {
@@ -64,7 +84,9 @@ function ChessBoard({ fenKey, postMove, color }) {
         movable: {
           dests: toDest(chess.moves({ verbose: true })),
         },
+        check: false,
       });
+      inCheck();
     }
   }, [fenKey]);
 

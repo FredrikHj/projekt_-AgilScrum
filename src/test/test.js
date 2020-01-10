@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 /* eslint-disable prefer-arrow-callback, func-names */
 const assert = require('assert');
-const { toDest } = require('../utils/index');
+const { toDest, getTurnColor, getColor } = require('../utils/index');
 
 
 describe('Tests', function () {
@@ -51,6 +51,40 @@ describe('Tests', function () {
         c2: ['c3', 'c4'],
       };
       assert.deepStrictEqual(toDest(data), expected);
+    });
+  });
+  describe('getTurnColor function', function () {
+    const playerColor = 'white';
+    let turnColor = 'white';
+    it('Should return golden color (#ffb048) if data does match', function () {
+      assert.strictEqual(getTurnColor(playerColor, turnColor), '#ffb048');
+    });
+    it('Should return grayish color (#ccc) if data does not match', function () {
+      turnColor = 'black';
+      assert.strictEqual(getTurnColor(playerColor, turnColor), '#ccc');
+    });
+  });
+  describe('getColor function', function () {
+    let mockUsername = 'Peter';
+    const mockData = {
+      id: '77b41760-2e1a-11ea-9f75-f19bab93d385',
+      gameName: 'Peters game',
+      fen: 'rnb2bnr/pp4pp/2p2k2/8/Q7/8/PPPQP2P/RNB1KBNR w KQ - 0 11',
+      players: [
+        { id: '77b43e70-2e1a-11ea-9f75-f19bab93d385', playerName: 'Peter', color: 'white' },
+        { id: '77b43e70-2e1a-11ec-9f75-f19bab93d384', playerName: 'Kalle', color: 'black' },
+      ],
+    };
+    it('Should return color (white) for chosen username', function () {
+      assert.strictEqual(getColor(mockData, mockUsername), 'white');
+    });
+    it('Should return color (black) for chosen username', function () {
+      mockUsername = 'Kalle';
+      assert.strictEqual(getColor(mockData, mockUsername), 'black');
+    });
+    it('Should return undefined if user not found', function () {
+      mockUsername = 'Pelle';
+      assert.strictEqual(getColor(mockData, mockUsername), undefined);
     });
   });
 });

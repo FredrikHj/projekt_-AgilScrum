@@ -1,0 +1,53 @@
+.promotion-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.promotion__piece-btn {
+    width: 120px;
+    height: 120px;
+    margin: 0 10px;
+    background: none;
+    border: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.promotion__piece-btn:hover {
+    opacity: 1;
+}
+
+.promotion__queen-white {
+    background-image: url('../../images/pieces/merida/wQ.svg');
+}
+
+.promotion__knight-white {
+    background-image: url('../../images/pieces/merida/wN.svg');
+}
+
+.promotion__rook-white {
+    background-image: url('../../images/pieces/merida/wR.svg');
+}
+
+.promotion__bishop-white {
+    background-image: url('../../images/pieces/merida/wB.svg');
+}
+
+.promotion__queen-black {
+    background-image: url('../../images/pieces/merida/bQ.svg');
+}
+
+.promotion__knight-black {
+    background-image: url('../../images/pieces/merida/bN.svg');
+}
+
+.promotion__rook-black {
+    background-image: url('../../images/pieces/merida/bR.svg');
+}
+
+.promotion__bishop-black {
+    background-image: url('../../images/pieces/merida/bB.svg');
+}
