@@ -5,6 +5,7 @@ import Chess from 'chess.js';
 import ChessBoard from '../ChessBoard/ChessBoard';
 import PlayerList from '../PlayerList/PlayerList';
 import PromotionList from '../PromotionList/PromotionList';
+import HistoryList from '../HistoryList/HistoryList';
 import { baseUrl } from '../../Config';
 import Modal from '../Modal/Modal';
 import { getColor } from '../../utils';
@@ -123,7 +124,6 @@ function GamePage({ match }) {
         pollData();
       });
   }, []);
-
   return (
     <div className="game-container">
       <PlayerList players={data.players} turn={getPlayerTurn()} />
@@ -142,6 +142,7 @@ function GamePage({ match }) {
           )
           : null}
       </div>
+      <HistoryList history={data.history} />
     </div>
   );
 }
