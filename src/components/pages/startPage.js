@@ -12,23 +12,30 @@ function StartPage() {
     updateLocalstorage(targetStr);
     setUserName(targetStr);
   };
-  return (
-    <section className="subPagesContainer">
 
-      <div className="userNameContainer">
-        <label htmlFor="userName">
-          Username
-          <input type="text" id="userName" className="input inputUsername" onChange={runUserName} value={userName} />
-        </label>
-      </div>
-      <Button
-        patchLink={link}
-        patchTo="/lobby"
-        className=""
-        name="GoTo Lobby"
-        function=""
-      />
-    </section>
+
+  return (
+    <div className="loginContainer">
+      <section className="subPagesContainer">
+        <h1 className="loginUserText">Username</h1>
+        <div className="userNameContainer">
+          <label htmlFor="userName">
+            Username
+            <input type="text" id="userName" className="input inputUsername" onChange={runUserName} value={userName} />
+          </label>
+        </div>
+        <div className="userNameContainer">
+          <Button
+            patchLink={link}
+            patchTo="/lobby"
+            className="loginButton"
+            name="Join game"
+            function=""
+          />
+        </div>
+
+      </section>
+    </div>
   );
 }
 
