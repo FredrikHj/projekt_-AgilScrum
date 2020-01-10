@@ -9,7 +9,7 @@ let cg = null;
 let chess = null;
 
 function ChessBoard({
-  fenKey, postMove, color, promotePiece,
+  fenKey, postMove, color, promotePiece, checkmateCb,
 }) {
   function checkPromotion(from, to) {
     const validMoves = chess.moves({ square: from, verbose: true });
@@ -21,6 +21,15 @@ function ChessBoard({
 
   function inCheck() {
     if (chess.in_check()) cg.set({ check: true });
+  }
+
+  function inCheckmate() {
+    if (chess.in_checkmate()) {
+        console.log('CHECKMATE')
+        console.log(chess.turn())
+        console.log(chess.fen())
+        checkmateCb();
+    }
   }
 
   function chessMakeMove(from, to) {
@@ -39,11 +48,8 @@ function ChessBoard({
         chess.move({ from, to });
         resolve();
       }
-      if (chess.in_checkmate()) {
-        // DO WHEN CHECKMATE
-      }
-      // DO WHEN CHECK
-      inCheck();
+      inCheckmate(); // DO WHEN CHECKMATE
+      inCheck(); // DO WHEN CHECK
     });
   }
 
@@ -87,11 +93,13 @@ function ChessBoard({
         check: false,
       });
       inCheck();
+      inCheckmate(); // JUST FOR TESTING (REMOVE ME LATER)
     }
   }, [fenKey]);
 
   useEffect(() => {
     createChessground();
+    inCheckmate(); // JUST FOR TESTING (REMOVE ME LATER)
   }, []);
 
   return (

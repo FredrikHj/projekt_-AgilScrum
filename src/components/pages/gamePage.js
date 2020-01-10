@@ -47,6 +47,10 @@ function GamePage({ match }) {
     setShowPromotionModal(false);
   }
 
+  function gameResultCallback() {
+    console.log('hello friuends')
+  }
+
   function gameResultContent() {
     if (isWinner) {
       return (
@@ -138,6 +142,7 @@ function GamePage({ match }) {
               fenKey={data.fen}
               postMove={postMove}
               promotePiece={promotePiece}
+              checkmateCb={gameResultCallback}
             />
           )
           : null}
