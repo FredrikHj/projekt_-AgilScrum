@@ -8,7 +8,9 @@ import { toDest } from '../../utils';
 let cg = null;
 let chess = null;
 
-function ChessBoard({ fenKey, postMove, color }) {
+function ChessBoard({
+  fenKey, postMove, color, promotePiece,
+}) {
   function checkPromotion(from, to) {
     const validMoves = chess.moves({ square: from, verbose: true });
     const idx = validMoves.findIndex(
@@ -22,21 +24,34 @@ function ChessBoard({ fenKey, postMove, color }) {
   }
 
   function chessMakeMove(from, to) {
-    if (checkPromotion(from, to)) {
-      // DO WHEN PROMOTING
-      chess.put({ type: 'q', color: 'w' }, from);
-    }
-    chess.move({ from, to });
-    if (chess.in_checkmate()) {
-      // DO WHEN CHECKMATE
-    }
-    // DO WHEN CHECK
-    inCheck();
+    return new Promise((resolve) => {
+      if (checkPromotion(from, to)) {
+        // DO WHEN PROMOTING
+        promotePiece(color)
+          .then((val) => {
+            chess.move({ from, to, promotion: val });
+            cg.set({
+              fen: chess.fen(),
+            });
+            resolve();
+          });
+      } else {
+        chess.move({ from, to });
+        resolve();
+      }
+      if (chess.in_checkmate()) {
+        // DO WHEN CHECKMATE
+      }
+      // DO WHEN CHECK
+      inCheck();
+    });
   }
 
   function afterMovePiece(before, after) {
-    chessMakeMove(before, after);
-    postMove(chess.fen(), before, after);
+    chessMakeMove(before, after)
+      .then(() => {
+        postMove(chess.fen(), before, after);
+      });
   }
 
   function createChessground() {
