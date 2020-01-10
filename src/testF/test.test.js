@@ -10,13 +10,12 @@ import LobbyPage from '../components/pages/lobbyPage';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('StartPage test', function () {
-  it('Renders three <Lobby/> and its main', function () {
-    const wrapper = shallow(<LobbyPage />);
-    expect(wrapper.find('main').length).toBe(1);
-  });
-
   it('Handle a userName input', function () {
     const wrapper = shallow(<StartPage />);
     expect(wrapper.find('.inputUsername').length).toBe(1);
   });
+  it('Renders three <Lobby/> class = lobby-container inclusive 2 children components', function () {
+    const wrapper = shallow(<LobbyPage />);
+    expect(wrapper.find('.lobby-container').children().length).toBe(2);
+   });
 });
