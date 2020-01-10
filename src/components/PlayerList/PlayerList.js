@@ -18,7 +18,7 @@ function PlayerList({ players, turn, forfeitCb }) {
           ))
           : null }
       </ul>
-      <Button type='button' patchLink={false} name='Forfeit' bFunction={forfeitCb}/>
+      <Button type="button" patchLink={false} name="Forfeit" bFunction={forfeitCb} />
     </div>
   );
 }

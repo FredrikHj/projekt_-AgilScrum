@@ -70,7 +70,7 @@ function GamePage({ match }) {
   }
 
   function gameResultContent() {
-    if(isForfeit) {
+    if (isForfeit) {
       return (
         <>
           <span>Your opponent has forfeited</span>
@@ -78,7 +78,7 @@ function GamePage({ match }) {
         </>
       );
     }
-    else if (isWinner && !isForfeit) {
+    if (isWinner && !isForfeit) {
       return (
         <>
           <span>Congratulations you won!</span>
@@ -86,7 +86,7 @@ function GamePage({ match }) {
         </>
 
       );
-    } 
+    }
     return (
       <>
         <span>You lost this one, better luck next time!</span>
@@ -107,8 +107,8 @@ function GamePage({ match }) {
         })
         .catch((error) => {
           clearTimeout(pollingTimeout);
-          if(error.response.status) {
-            if(isWinner) {
+          if (error.response.status) {
+            if (isWinner) {
               setIsWinner(false);
               setIsForfeit(true);
             }
