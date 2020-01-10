@@ -78,7 +78,7 @@ app.get('/api/game/:id', (req, res) => {
 app.delete('/api/game/:id', (req, res) => {
   const id = req.params.id;
 
-  gamesCopy = games.filter((game) => {
+  const gamesCopy = games.filter((game) => {
     return game.id !== id
   })
 
