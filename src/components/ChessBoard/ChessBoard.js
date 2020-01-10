@@ -25,10 +25,10 @@ function ChessBoard({
 
   function inCheckmate() {
     if (chess.in_checkmate()) {
-        console.log('CHECKMATE')
-        console.log(chess.turn())
-        console.log(chess.fen())
-        checkmateCb();
+      /* console.log('CHECKMATE');
+      console.log(chess.turn());
+      console.log(chess.fen()); */
+      checkmateCb();
     }
   }
 

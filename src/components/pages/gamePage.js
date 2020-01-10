@@ -48,7 +48,7 @@ function GamePage({ match }) {
   }
 
   function gameResultCallback() {
-    console.log('hello friuends')
+    /* console.log('hello friuends'); */
   }
 
   function gameResultContent() {
