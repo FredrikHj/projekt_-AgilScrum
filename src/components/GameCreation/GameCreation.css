@@ -1,0 +1,66 @@
+.gamecreation-container {
+  margin-left: 10px;
+  min-width: 300px;
+  height: 800px;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  background-color: #fefefe;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-size: 24px;
+  font-weight: bold;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #9e9e9e;
+  display: inline-block;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.label-name {
+  padding-bottom: 2px;
+  font-weight: 600;
+  font-size: 22px;
+  color: #535353;
+}
+
+.input-name {
+  display: block;
+  border: 1px solid #e6e6e6;
+  border-radius: 2px;
+  outline: none;
+  background: transparent;
+  font-family: 'Raleway', sans-serif;
+  font-size: 18px;
+  color: #333333;
+  line-height: 1.2;
+  padding: 0 12px;
+  height: 40px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.label-error {
+  color: red;
+}
+
+.header-container {
+  justify-content: center;
+  display: flex;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  background-color: #bed4ea42;
+  border-radius: 10px 10px 0 0;
+}
+
+.header-label {
+  font-weight: 600;
+  font-size: 24px;
+  color: #255686;
+}
+
+.form-container {
+  padding: 25px 10px 0 10px;
+}
