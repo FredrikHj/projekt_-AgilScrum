@@ -5,22 +5,24 @@ import './lobbyPage.css';
 import GameList from '../GameList/GameList';
 import GameCreation from '../GameCreation/GameCreation';
 
+let pollingTimeout = null;
+
 function LobbyPage() {
   const [userName, setUserName] = useState(false);
   const [data, setData] = useState([]);
 
-  function pollData(path) {
-    if (window.location.pathname !== path) return;
-    setTimeout(() => {
+  function pollData() {
+    pollingTimeout = setTimeout(() => {
+      clearTimeout(pollingTimeout);
       axios.get(`${baseUrl}api/lobby`)
         .then((res) => {
           if (res.status >= 200 && res.status < 300) {
             setData(res.data);
-            pollData('/lobby');
+            pollData();
           }
         })
         .catch(() => {
-          pollData('/lobby');
+          pollData();
         });
     }, 2000);
   }
@@ -31,12 +33,16 @@ function LobbyPage() {
       .then((res) => {
         if (res.status >= 200 && res.status < 300) {
           setData(res.data);
-          pollData('/lobby');
+          pollData();
         }
       })
       .catch(() => {
-        pollData('/lobby');
+        pollData();
       });
+  }, []);
+
+  useEffect(() => () => {
+    clearTimeout(pollingTimeout);
   }, []);
 
   return (
