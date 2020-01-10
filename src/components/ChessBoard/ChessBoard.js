@@ -19,6 +19,10 @@ function ChessBoard({
     return idx !== -1;
   }
 
+  function inCheck() {
+    if (chess.in_check()) cg.set({ check: true });
+  }
+
   function chessMakeMove(from, to) {
     return new Promise((resolve) => {
       if (checkPromotion(from, to)) {
@@ -37,9 +41,9 @@ function ChessBoard({
       }
       if (chess.in_checkmate()) {
         // DO WHEN CHECKMATE
-      } else if (chess.in_check()) {
-        // DO WHEN CHECK
       }
+      // DO WHEN CHECK
+      inCheck();
     });
   }
 
@@ -80,7 +84,9 @@ function ChessBoard({
         movable: {
           dests: toDest(chess.moves({ verbose: true })),
         },
+        check: false,
       });
+      inCheck();
     }
   }, [fenKey]);
 
