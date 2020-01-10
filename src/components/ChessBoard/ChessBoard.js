@@ -28,7 +28,7 @@ function ChessBoard({
       /* console.log('CHECKMATE');
       console.log(chess.turn());
       console.log(chess.fen()); */
-      checkmateCb();
+      checkmateCb(chess.turn());
     }
   }
 
