@@ -23,6 +23,7 @@ function GamePage({ match }) {
   const [username, setUsername] = useState('');
   const [showWinnerModal, setShowWinnerModal] = useState(false);
   const [isWinner, setIsWinner] = useState(false);
+  const [isForfeit, setIsForfeit] = useState(false);
   const [showPromotionModal, setShowPromotionModal] = useState(false);
   const [promotionColor, setPromotionColor] = useState('');
   const [redirectLobby, setRedirectLobby] = useState(false);
@@ -69,7 +70,15 @@ function GamePage({ match }) {
   }
 
   function gameResultContent() {
-    if (isWinner) {
+    if(isForfeit) {
+      return (
+        <>
+          <span>Your opponent has forfeited</span>
+          <Button type="button" name="Return to lobby" patchLink={false} bFunction={endGame} />
+        </>
+      );
+    }
+    else if (isWinner && !isForfeit) {
       return (
         <>
           <span>Congratulations you won!</span>
@@ -77,7 +86,7 @@ function GamePage({ match }) {
         </>
 
       );
-    }
+    } 
     return (
       <>
         <span>You lost this one, better luck next time!</span>
@@ -96,8 +105,15 @@ function GamePage({ match }) {
             pollData();
           }
         })
-        .catch(() => {
+        .catch((error) => {
           clearTimeout(pollingTimeout);
+          if(error.response.status) {
+            if(isWinner) {
+              setIsWinner(false);
+              setIsForfeit(true);
+            }
+            setShowWinnerModal(true);
+          }
         });
     }, 2000);
   }
@@ -128,13 +144,11 @@ function GamePage({ match }) {
   }
 
   useEffect(() => () => {
-    // console.log('UNMOUNT');
     clearTimeout(pollingTimeout);
   }, []);
 
   useEffect(() => {
-    // Mock username
-    setUsername(Math.floor(Math.random() * 2) ? 'jonas' : 'Rasmus');
+    setUsername(localStorage.getItem('userName'));
 
     axios.get(`${baseUrl}api/game/${paramId}`)
       .then((res) => {
@@ -152,7 +166,7 @@ function GamePage({ match }) {
       {
         redirectLobby ? <Redirect to="/lobby" /> : null
       }
-      <PlayerList players={data.players} turn={getPlayerTurn()} />
+      <PlayerList players={data.players} turn={getPlayerTurn()} forfeitCb={() => gameResultCallback(getColor(data, username) === 'white' ? 'w' : 'b')} />
       <Modal title="CHECKMATE" content={gameResultContent()} show={showWinnerModal} />
       <Modal title="Choose promotion" content={<PromotionList color={promotionColor} promoteFunc={choosePromote} />} show={showPromotionModal} />
 
