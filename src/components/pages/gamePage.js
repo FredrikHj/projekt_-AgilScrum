@@ -26,7 +26,9 @@ function GamePage({ match }) {
   const [isForfeit, setIsForfeit] = useState(false);
   const [showPromotionModal, setShowPromotionModal] = useState(false);
   const [promotionColor, setPromotionColor] = useState('');
+  const [showForfeitModal, setShowForfeitModal] = useState(false);
   const [redirectLobby, setRedirectLobby] = useState(false);
+  const [isLoser, setIsLoser] = useState(false);
 
   function asyncPromote() {
     return new Promise((resolve) => {
@@ -55,6 +57,7 @@ function GamePage({ match }) {
   function gameResultCallback(colorLost) {
     const playerColor = getColor(data, username) === 'white' ? 'w' : 'b';
     if (playerColor !== colorLost) setIsWinner(true);
+    else setIsLoser(true);
     setShowWinnerModal(true);
   }
 
@@ -70,15 +73,7 @@ function GamePage({ match }) {
   }
 
   function gameResultContent() {
-    if (isForfeit) {
-      return (
-        <>
-          <span>Your opponent has forfeited</span>
-          <Button type="button" name="Return to lobby" patchLink={false} bFunction={endGame} />
-        </>
-      );
-    }
-    if (isWinner && !isForfeit) {
+    if (isWinner) {
       return (
         <>
           <span>Congratulations you won!</span>
@@ -87,10 +82,30 @@ function GamePage({ match }) {
 
       );
     }
+    if (isLoser) {
+      return (
+        <>
+          <span>You lost this one, better luck next time!</span>
+          <Button type="button" name="Return to lobby" patchLink={false} bFunction={endGame} />
+        </>
+      );
+    }
+    if (isForfeit) {
+      return (
+        <>
+          <span>Your opponent has forfeited</span>
+          <Button type="button" name="Return to lobby" patchLink={false} bFunction={endGame} />
+        </>
+      );
+    }
+    return null;
+  }
+
+  function forfeitContent() {
     return (
       <>
-        <span>You lost this one, better luck next time!</span>
-        <Button type="button" name="Return to lobby" patchLink={false} bFunction={endGame} />
+        <span>Are you sure you want to forfeit?</span>
+        <Button type="button" name="Yes" patchLink={false} bFunction={endGame} />
       </>
     );
   }
@@ -107,9 +122,8 @@ function GamePage({ match }) {
         })
         .catch((error) => {
           clearTimeout(pollingTimeout);
-          if (error.response.status) {
-            if (isWinner) {
-              setIsWinner(false);
+          if (error.response.status === 404) {
+            if (!isWinner && !isLoser) {
               setIsForfeit(true);
             }
             setShowWinnerModal(true);
@@ -166,9 +180,32 @@ function GamePage({ match }) {
       {
         redirectLobby ? <Redirect to="/lobby" /> : null
       }
-      <PlayerList players={data.players} turn={getPlayerTurn()} forfeitCb={() => gameResultCallback(getColor(data, username) === 'white' ? 'w' : 'b')} />
-      <Modal title="CHECKMATE" content={gameResultContent()} show={showWinnerModal} />
-      <Modal title="Choose promotion" content={<PromotionList color={promotionColor} promoteFunc={choosePromote} />} show={showPromotionModal} />
+      <PlayerList
+        players={data.players}
+        turn={getPlayerTurn()}
+        forfeitCb={() => setShowForfeitModal(true)}
+      />
+      <Modal
+        title="Confirm"
+        content={forfeitContent()}
+        show={showForfeitModal}
+        close={() => setShowForfeitModal(false)}
+      />
+      <Modal
+        title="CHECKMATE"
+        content={gameResultContent()}
+        show={showWinnerModal}
+      />
+      <Modal
+        title="Choose promotion"
+        content={(
+          <PromotionList
+            color={promotionColor}
+            promoteFunc={choosePromote}
+          />
+)}
+        show={showPromotionModal}
+      />
 
       <div className="board-container">
         { Object.keys(data).length
@@ -189,3 +226,5 @@ function GamePage({ match }) {
 }
 
 export default GamePage;
+
+// gameResultCallback(getColor(data, username) === 'white' ? 'w' : 'b')
