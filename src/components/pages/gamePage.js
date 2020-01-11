@@ -226,5 +226,3 @@ function GamePage({ match }) {
 }
 
 export default GamePage;
-
-// gameResultCallback(getColor(data, username) === 'white' ? 'w' : 'b')

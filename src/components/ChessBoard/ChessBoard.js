@@ -25,9 +25,6 @@ function ChessBoard({
 
   function inCheckmate() {
     if (chess.in_checkmate()) {
-      /* console.log('CHECKMATE');
-      console.log(chess.turn());
-      console.log(chess.fen()); */
       checkmateCb(chess.turn());
     }
   }
@@ -93,13 +90,12 @@ function ChessBoard({
         check: false,
       });
       inCheck();
-      inCheckmate(); // JUST FOR TESTING (REMOVE ME LATER)
+      inCheckmate();
     }
   }, [fenKey]);
 
   useEffect(() => {
     createChessground();
-    inCheckmate(); // JUST FOR TESTING (REMOVE ME LATER)
   }, []);
 
   return (
