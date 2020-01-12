@@ -4,19 +4,26 @@ import './GameList.css';
 import axios from 'axios';
 import { baseUrl } from '../../Config';
 import Modal from '../Modal/Modal';
+import {userID} from '../localStorage';
 
 function GameList({ games, playerName }) {
   const [redirect, setRedirect] = useState('');
   const [error, setError] = useState('');
 
-  function joinGame(id) {
+  function joinGame(id, name) {
+    const hostPLayer = name[0].playerName;
+    let player = playerName;
+    if (hostPLayer.toLowerCase() === player.toLowerCase()) {
+     player += ' (2)';
+    }
     axios.post(`${baseUrl}api/game/${id}/join`, {
-      playerName,
-      id,
+      playerName:player,
+      id:id,
     })
       .then((res) => {
         if (res.status === 200) {
           setRedirect(res.data.gameId);
+          userID(res.data.player.id);
         }
       })
       .catch(() => {
@@ -43,7 +50,7 @@ function GameList({ games, playerName }) {
               key={game.id}
               className="gamelist-game"
               onClick={() => {
-                joinGame(game.id);
+                joinGame(game.id, game.players);
               }}
               onKeyUp={(e) => {
                 if (e.keyCode === 13) {

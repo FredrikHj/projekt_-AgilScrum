@@ -5,6 +5,7 @@ import './GameCreation.css';
 import Button from '../Button/Button';
 import { baseUrl } from '../../Config';
 import Modal from '../Modal/Modal';
+import {userID} from '../localStorage';
 
 function GameCreation({ playerName }) {
   const [error, setError] = useState('');
@@ -22,6 +23,7 @@ function GameCreation({ playerName }) {
       .then((res) => {
         if (res.status === 201) {
           setRedirect(res.data.id);
+          userID(res.data.players[0].id);
         }
       })
       .catch(() => {
