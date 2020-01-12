@@ -4,7 +4,7 @@ import './GameList.css';
 import axios from 'axios';
 import { baseUrl } from '../../Config';
 import Modal from '../Modal/Modal';
-import {userID} from '../localStorage';
+import { userID } from '../localStorage';
 
 function GameList({ games, playerName }) {
   const [redirect, setRedirect] = useState('');
@@ -14,11 +14,11 @@ function GameList({ games, playerName }) {
     const hostPLayer = name[0].playerName;
     let player = playerName;
     if (hostPLayer.toLowerCase() === player.toLowerCase()) {
-     player += ' (2)';
+      player += ' (2)';
     }
     axios.post(`${baseUrl}api/game/${id}/join`, {
-      playerName:player,
-      id:id,
+      playerName: player,
+      id,
     })
       .then((res) => {
         if (res.status === 200) {

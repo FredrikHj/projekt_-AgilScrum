@@ -5,7 +5,7 @@ import './GameCreation.css';
 import Button from '../Button/Button';
 import { baseUrl } from '../../Config';
 import Modal from '../Modal/Modal';
-import {userID} from '../localStorage';
+import { userID } from '../localStorage';
 
 function GameCreation({ playerName }) {
   const [error, setError] = useState('');
