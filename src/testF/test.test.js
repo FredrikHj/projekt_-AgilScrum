@@ -100,7 +100,6 @@ describe('Tests', function () {
   });
 
   describe('PromotionList component', function () {
-    
     it('Should render PromotionList', function () {
       const wrapper = shallow(<PromotionList color="white" />);
       expect(wrapper.find('.promotion-container').length).toBe(1);
