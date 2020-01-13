@@ -1,8 +1,8 @@
 /* eslint-env mocha */
 /* eslint-disable prefer-arrow-callback, func-names */
-
 const assert = require('assert');
 const { toDest, getTurnColor, getColor } = require('../utils/index');
+
 
 describe('Tests', function () {
   describe('toDest function', function () {
