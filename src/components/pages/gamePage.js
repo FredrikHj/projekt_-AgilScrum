@@ -21,6 +21,7 @@ function GamePage({ match }) {
   const paramId = match.params.id;
   const [data, setData] = useState({});
   const [username, setUsername] = useState('');
+  const [userId, setUserId] = useState('');
   const [showWinnerModal, setShowWinnerModal] = useState(false);
   const [isWinner, setIsWinner] = useState(false);
   const [isForfeit, setIsForfeit] = useState(false);
@@ -55,7 +56,7 @@ function GamePage({ match }) {
   }
 
   function gameResultCallback(colorLost) {
-    const playerColor = getColor(data, username) === 'white' ? 'w' : 'b';
+    const playerColor = getColor(data, userId) === 'white' ? 'w' : 'b';
     if (playerColor !== colorLost) setIsWinner(true);
     else setIsLoser(true);
     setShowWinnerModal(true);
@@ -163,10 +164,13 @@ function GamePage({ match }) {
 
   useEffect(() => {
     setUsername(localStorage.getItem('userName'));
-
+    const storageUserId = localStorage.getItem('userId');
     axios.get(`${baseUrl}api/game/${paramId}`)
       .then((res) => {
         if (res.status >= 200 && res.status < 300) {
+          const user = res.data.players.find((player) => player.id === storageUserId);
+          setUsername(user.playerName);
+          setUserId(user.id);
           setData(res.data);
           pollData();
         }
@@ -211,7 +215,7 @@ function GamePage({ match }) {
         { Object.keys(data).length
           ? (
             <ChessBoard
-              color={getColor(data, username)}
+              color={getColor(data, userId)}
               fenKey={data.fen}
               postMove={postMove}
               promotePiece={promotePiece}
