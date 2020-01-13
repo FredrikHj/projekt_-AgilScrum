@@ -8,7 +8,7 @@ import './Button.css';
 
 const Button = (props) => {
   const {
-    patchLink, patchTo, name, bFunction, type,
+    patchLink, patchTo, name, bFunction, type, className,
   } = props;
   return (
     <>
@@ -19,7 +19,7 @@ const Button = (props) => {
           </Link>
         )
 
-        : <button type={type} className="button" onClick={bFunction}>{name}</button>}
+        : <button type={type} className={`button ${className}`} onClick={bFunction}>{name}</button>}
     </>
   );
 };
