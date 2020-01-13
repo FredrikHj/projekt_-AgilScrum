@@ -34,8 +34,8 @@ function GameCreation({ playerName }) {
   return (
     <div className="gamecreation-container">
       {
-        redirect && (<Redirect to={`/game/${redirect}`} />)
-      }
+          redirect && (<Redirect to={`/game/${redirect}`} />)
+        }
       <div className="header-container">
         <p className="header-label">Create a game</p>
       </div>
