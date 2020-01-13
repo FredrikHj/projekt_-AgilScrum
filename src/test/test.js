@@ -65,7 +65,7 @@ describe('Tests', function () {
     });
   });
   describe('getColor function', function () {
-    let mockUsername = 'Peter';
+    let mockId = '77b43e70-2e1a-11ea-9f75-f19bab93d385';
     const mockData = {
       id: '77b41760-2e1a-11ea-9f75-f19bab93d385',
       gameName: 'Peters game',
@@ -75,16 +75,16 @@ describe('Tests', function () {
         { id: '77b43e70-2e1a-11ec-9f75-f19bab93d384', playerName: 'Kalle', color: 'black' },
       ],
     };
-    it('Should return color (white) for chosen username', function () {
-      assert.strictEqual(getColor(mockData, mockUsername), 'white');
+    it('Should return color (white) for chosen id', function () {
+      assert.strictEqual(getColor(mockData, mockId), 'white');
     });
-    it('Should return color (black) for chosen username', function () {
-      mockUsername = 'Kalle';
-      assert.strictEqual(getColor(mockData, mockUsername), 'black');
+    it('Should return color (black) for chosen id', function () {
+      mockId = '77b43e70-2e1a-11ec-9f75-f19bab93d384';
+      assert.strictEqual(getColor(mockData, mockId), 'black');
     });
     it('Should return undefined if user not found', function () {
-      mockUsername = 'Pelle';
-      assert.strictEqual(getColor(mockData, mockUsername), undefined);
+      mockId = '77b43e70-2e1a-11ec-9f75-f19bab93d';
+      assert.strictEqual(getColor(mockData, mockId), undefined);
     });
   });
 });

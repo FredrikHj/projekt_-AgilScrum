@@ -22,8 +22,8 @@ function GameList({ games, playerName }) {
     })
       .then((res) => {
         if (res.status === 200) {
-          setRedirect(res.data.gameId);
           userID(res.data.player.id);
+          setRedirect(res.data.gameId);
         }
       })
       .catch(() => {

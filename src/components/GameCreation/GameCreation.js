@@ -22,8 +22,8 @@ function GameCreation({ playerName }) {
     })
       .then((res) => {
         if (res.status === 201) {
-          setRedirect(res.data.id);
           userID(res.data.players[0].id);
+          setRedirect(res.data.id);
         }
       })
       .catch(() => {
