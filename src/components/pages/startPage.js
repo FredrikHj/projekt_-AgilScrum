@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import updateLocalstorage from '../localStorage';
+import { updateLocalstorage } from '../localStorage';
 import Button from '../Button/Button';
 
 function StartPage() {
