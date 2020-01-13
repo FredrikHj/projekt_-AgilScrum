@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {
   Redirect,
 } from 'react-router-dom';
-import updateLocalstorage from '../localStorage';
+import { updateLocalstorage } from '../localStorage';
 import Button from '../Button/Button';
 
 function StartPage() {

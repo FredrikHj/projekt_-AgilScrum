@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import './gamePage.css';
 import Chess from 'chess.js';
@@ -9,19 +10,25 @@ import HistoryList from '../HistoryList/HistoryList';
 import { baseUrl } from '../../Config';
 import Modal from '../Modal/Modal';
 import { getColor } from '../../utils';
+import Button from '../Button/Button';
 
 const chessJs = new Chess();
 
 let promotionPiece = null;
+let pollingTimeout = null;
 
 function GamePage({ match }) {
   const paramId = match.params.id;
   const [data, setData] = useState({});
   const [username, setUsername] = useState('');
   const [showWinnerModal, setShowWinnerModal] = useState(false);
-  const [isWinner] = useState(true);
+  const [isWinner, setIsWinner] = useState(false);
+  const [isForfeit, setIsForfeit] = useState(false);
   const [showPromotionModal, setShowPromotionModal] = useState(false);
   const [promotionColor, setPromotionColor] = useState('');
+  const [showForfeitModal, setShowForfeitModal] = useState(false);
+  const [redirectLobby, setRedirectLobby] = useState(false);
+  const [isLoser, setIsLoser] = useState(false);
 
   function asyncPromote() {
     return new Promise((resolve) => {
@@ -47,30 +54,65 @@ function GamePage({ match }) {
     setShowPromotionModal(false);
   }
 
+  function gameResultCallback(colorLost) {
+    const playerColor = getColor(data, username) === 'white' ? 'w' : 'b';
+    if (playerColor !== colorLost) setIsWinner(true);
+    else setIsLoser(true);
+    setShowWinnerModal(true);
+  }
+
+  function endGame() {
+    clearTimeout(pollingTimeout);
+    axios.delete(`${baseUrl}api/game/${paramId}`)
+      .then(() => {
+        setRedirectLobby(true);
+      })
+      .catch(() => {
+        setRedirectLobby(true);
+      });
+  }
+
   function gameResultContent() {
     if (isWinner) {
       return (
         <>
-          <p className="modal-text">Congratulations you won!</p>
-          <button type="button">End Game</button>
+          <span>Congratulations you won!</span>
+          <Button type="button" name="Return to lobby" patchLink={false} bFunction={endGame} />
         </>
 
       );
     }
+    if (isLoser) {
+      return (
+        <>
+          <span>You lost this one, better luck next time!</span>
+          <Button type="button" name="Return to lobby" patchLink={false} bFunction={endGame} />
+        </>
+      );
+    }
+    if (isForfeit) {
+      return (
+        <>
+          <span>Your opponent has forfeited</span>
+          <Button type="button" name="Return to lobby" patchLink={false} bFunction={endGame} />
+        </>
+      );
+    }
+    return null;
+  }
+
+  function forfeitContent() {
     return (
       <>
-        <p>Better luck next time!</p>
-        <button type="button">End Game</button>
+        <span>Are you sure you want to forfeit?</span>
+        <Button type="button" name="Yes" patchLink={false} bFunction={endGame} />
       </>
     );
   }
 
-  function closeWinnerModal() {
-    setShowWinnerModal(false);
-  }
-
   function pollData() {
-    setTimeout(() => {
+    pollingTimeout = setTimeout(() => {
+      clearTimeout(pollingTimeout);
       axios.get(`${baseUrl}api/game/${paramId}`)
         .then((res) => {
           if (res.status >= 200 && res.status < 300) {
@@ -78,8 +120,14 @@ function GamePage({ match }) {
             pollData();
           }
         })
-        .catch(() => {
-          pollData();
+        .catch((error) => {
+          clearTimeout(pollingTimeout);
+          if (error.response.status === 404) {
+            if (!isWinner && !isLoser) {
+              setIsForfeit(true);
+            }
+            setShowWinnerModal(true);
+          }
         });
     }, 2000);
   }
@@ -109,9 +157,12 @@ function GamePage({ match }) {
       });
   }
 
+  useEffect(() => () => {
+    clearTimeout(pollingTimeout);
+  }, []);
+
   useEffect(() => {
-    // Mock username
-    setUsername(Math.floor(Math.random() * 2) ? 'jonas' : 'Rasmus');
+    setUsername(localStorage.getItem('userName'));
 
     axios.get(`${baseUrl}api/game/${paramId}`)
       .then((res) => {
@@ -126,9 +177,35 @@ function GamePage({ match }) {
   }, []);
   return (
     <div className="game-container">
-      <PlayerList players={data.players} turn={getPlayerTurn()} />
-      <Modal title={isWinner ? 'Winner' : 'Loser'} content={gameResultContent()} show={showWinnerModal} close={closeWinnerModal} />
-      <Modal title="Choose promotion" content={<PromotionList color={promotionColor} promoteFunc={choosePromote} />} show={showPromotionModal} />
+      {
+        redirectLobby ? <Redirect to="/lobby" /> : null
+      }
+      <PlayerList
+        players={data.players}
+        turn={getPlayerTurn()}
+        forfeitCb={() => setShowForfeitModal(true)}
+      />
+      <Modal
+        title="Confirm"
+        content={forfeitContent()}
+        show={showForfeitModal}
+        close={() => setShowForfeitModal(false)}
+      />
+      <Modal
+        title="CHECKMATE"
+        content={gameResultContent()}
+        show={showWinnerModal}
+      />
+      <Modal
+        title="Choose promotion"
+        content={(
+          <PromotionList
+            color={promotionColor}
+            promoteFunc={choosePromote}
+          />
+)}
+        show={showPromotionModal}
+      />
 
       <div className="board-container">
         { Object.keys(data).length
@@ -138,6 +215,7 @@ function GamePage({ match }) {
               fenKey={data.fen}
               postMove={postMove}
               promotePiece={promotePiece}
+              checkmateCb={gameResultCallback}
             />
           )
           : null}

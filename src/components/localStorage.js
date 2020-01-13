@@ -1,4 +1,9 @@
-const updateLocalstorage = (userNameStr) => {
-  localStorage.setItem('userName', userNameStr);
+const updateLocalstorage = (username) => {
+  localStorage.setItem('userName', username);
 };
-export default updateLocalstorage;
+const userID = (id) => {
+  localStorage.setItem('userId', id);
+};
+
+module.exports.updateLocalstorage = updateLocalstorage;
+module.exports.userID = userID;
