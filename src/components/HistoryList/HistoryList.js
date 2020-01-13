@@ -10,7 +10,7 @@ function HistoryList({ history }) {
       <TransitionGroup className="history-list__list" component="ul">
         {
                     history
-                      ? history.reverse().map((move, idx) => (
+                      ? history.map((move, idx) => (
                         <CSSTransition key={move.id} timeout={300} classNames="history-list__slide">
                           <li key={move.id} className="history-list__list-item">
                             <div className="history-list__list-number">
@@ -29,7 +29,7 @@ function HistoryList({ history }) {
                             </div>
                           </li>
                         </CSSTransition>
-                      ))
+                      )).reverse()
                       : null
                 }
       </TransitionGroup>

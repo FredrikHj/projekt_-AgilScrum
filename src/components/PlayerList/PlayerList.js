@@ -3,8 +3,9 @@ import './PlayerList.css';
 import { faChessKing } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getTurnColor } from '../../utils';
+import Button from '../Button/Button';
 
-function PlayerList({ players, turn }) {
+function PlayerList({ players, turn, forfeitCb }) {
   return (
     <div className="player-list__container">
       <ul className="player-list__list">
@@ -17,6 +18,7 @@ function PlayerList({ players, turn }) {
           ))
           : null }
       </ul>
+      <Button type="button" patchLink={false} name="Forfeit" bFunction={forfeitCb} />
     </div>
   );
 }
