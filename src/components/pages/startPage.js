@@ -40,7 +40,7 @@ function StartPage() {
             type="submit"
             patchLink={false}
             patchTo="/lobby"
-            className="loginButton maxWidth"
+            addedClassNames="loginButton maxWidth"
             name="Join game"
             bFunction={submitUserName}
           />
