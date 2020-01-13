@@ -15,7 +15,7 @@ function HistoryList({ history }) {
                           <li key={move.id} className="history-list__list-item">
                             <div className="history-list__list-number">
                                 #
-                              {history.length - idx}
+                              {idx + 1}
                             </div>
                             <div>
                               <div className="history-list__name">{move.name}</div>
