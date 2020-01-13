@@ -13,13 +13,13 @@ function StartPage() {
     const targetStr = e.target.value;
     setUserName(targetStr);
   };
-  
+
   const submitUserName = () => {
     if (userName.length > 0) {
       updateLocalstorage(userName);
       setGotoLobby(true);
     }
-  }
+  };
 
   return (
     <div className="loginContainer">

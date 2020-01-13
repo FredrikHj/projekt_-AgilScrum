@@ -31,7 +31,7 @@ function GameCreation({ playerName }) {
 
   return (
     <div className="gamecreation-container">
-        {
+      {
           redirect && (<Redirect to={`/game/${redirect}`} />)
         }
       <div className="header-container">
