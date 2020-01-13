@@ -4,6 +4,14 @@
 const request = require('supertest');
 const app = require('./server.js');
 
+function timeout(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+beforeAll(async () => {
+  await timeout(2000);
+})
+
 describe('/api', () => {
   describe('GET /api/lobby', () => {
     it('should fetch all games and make sure it responds with JSON', async (done) => {
@@ -16,15 +24,13 @@ describe('/api', () => {
     });
   });
 
-  describe('POST /api/lobby', () => {
+  describe('POST/api/lobby', () => {
     it('should create a new post', async (done) => {
       const res = await request(app)
         .post('/api/lobby')
         .send({
           gameName: 'EPIC GAME',
-          player: {
-            playerName: 'Katla'
-          }
+          playerName: 'Katla'
         });
       expect(res.body.gameName).toEqual('EPIC GAME');
       expect(res.body.players[0].playerName).toEqual('Katla');
@@ -98,6 +104,68 @@ describe('/api', () => {
       expect(res.statusCode).toEqual(400);
       done();
     });
+  })
+
+  describe('POST /api/game/:id/join', () => {
+    let id;
+    it('should fetch all games and make sure it responds with JSON', async (done) => {
+      const res = await request(app)
+        .get('/api/lobby')
+        .set('Accept', 'application/json');
+      id = res.body[0].id;
+      expect(res.statusCode).toEqual(200);
+      done();
+    });
+
+    it('Should accept a new player to a game', async (done) => {
+      const obj = { playerName: "August" }
+
+      const res = await request(app)
+        .post(`/api/game/${id}/join`)
+        .send(obj)
+
+      expect(res.statusCode).toEqual(200);
+      done();
+    })
+
+    it("should return error if id doesn't exist", async (done) => {
+      const obj = { playerName: "August" }
+
+      const res = await request(app)
+        .post(`/api/game/error/join`)
+        .send(obj)
+
+      expect(res.statusCode).toEqual(400);
+      done();
+    })
+  })
+
+  describe('DELETE /api/game/:id', () => {
+    let id;
+    it('should fetch all games and make sure it responds with JSON', async (done) => {
+      const res = await request(app)
+        .get('/api/lobby')
+        .set('Accept', 'application/json');
+      id = res.body[0].id;
+      expect(res.statusCode).toEqual(200);
+      done();
+    });
+
+    it('Should delete the game', async (done) => {
+      const res = await request(app)
+        .delete(`/api/game/${id}`)
+
+      expect(res.statusCode).toEqual(200);
+      done();
+    })
+
+    it('Should fail to delete', async (done) => {
+      const res = await request(app)
+        .delete(`/api/game/123`)
+
+      expect(res.statusCode).toEqual(400);
+      done();
+    })
   })
 
   afterAll(() => {
