@@ -115,3 +115,80 @@ Emil och Jonas som har jobbat med servern, tyckte att de kunde ha gjort fler utf
 
 ### Backend
 Allt ska vara färdigt, om inte buggar hittas
+
+## Sprint review
+
+**Frontenddelen** : 
+* Landing page
+    * Vi har ändrat typen av knappen till en submit
+    * Gjort om styling av sidan så den matchar resten av sidor
+
+* Lobby page
+    * Polling i lobbyn är fixad (Memory leak bug fixad)
+    * Join game funktionalitet tillagd
+    * Create game funktionalitet tillagd
+    * Gjort om styling av sidan så den matchar resten av sidor
+    * Bug fixad när spelare haft samma namn. (Sätter även ID i localStorage)
+    * Game list tillagd, renderar ut alla spel
+
+* Game page
+    * Piece promotion tillagd, kan välja mellan fyra pjäser.
+    * Funktionalitet om spelare hamnar i schack
+    * Bug fixad när spelare haft samma namn. (Hämtar istället ID från localStorage)
+    * History list tillagd (Bug fixad med reverse)
+    * Hantering så spelplanen är rättvänd relativt till vilken färg man är tilldelad
+    * Spel resultat modaler tillagda, både för schack matt och "ge upp"
+    * funktionalitet när spelare ger upp, tar bort spelet från servern
+
+* Tester
+    * Tester skrivna för Landing page
+    * Tester skrivna för Lobby page
+    * Tester skrivna för de flesta komponenter som används på Game page
+    * fixade så jest/enzyme tester körs via husky (fixat så det inte fastnar i watch mode)
+    
+**Backenddelen**
+* Dokumentation för alla endpoints skapad
+
+### Retrospektiv
+
+**Fredrik**
+
+**+** Fredrik var nöjd med testerna som skrivits och känner att han lärt sig mer om testing.
+
+**-**
+
+**Jonas**
+
+**+** Nöjd med styling för Lobby och Landingpage
+
+**+** Fått en ny uppfattning av tester och hur kraftfullt det är
+
+**+** Fått en större förståelse över hur man arbetar i olika branches
+
+**+** Gått smidigt att arbeta i grupp
+
+**-** Fler issues än det som var planerat kom till efter hand
+
+**Emil**
+
+**+** Nöjd med slutresultatet
+
+**+** Grupp dynamiken har fungerat utmärkt
+
+**+** Fått jobba och lära mig mer om tester
+
+**-** Känt mig smått blockerad när många PR:s legat ute samtidigt
+
+**Rasmus**
+
+**+** Tycker vi har haft bra kommunikation
+
+**+** Vi har klarat sprinten
+
+**+** Vi har skrivit många bra tester
+
+**+** Arbetet i gruppen har fungerat bra, vi har inte krockat med varandra (inte mycket konflikter)
+
+**-** Känt mig smått blockerad när många PR:s legat ute samtidigt
+
+**-** Blev blockarede av husky jest/enzyme kördes i watch mode och vi kunde då inte commita. Lösningen fanns redan i en PR så var inte så länge.
