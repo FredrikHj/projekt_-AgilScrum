@@ -75,10 +75,10 @@ describe('Tests', function () {
         { id: '77b43e70-2e1a-11ec-9f75-f19bab93d384', playerName: 'Kalle', color: 'black' },
       ],
     };
-    it('Should return color (white) for chosen username', function () {
+    it('Should return color (white) for chosen id', function () {
       assert.strictEqual(getColor(mockData, mockId), 'white');
     });
-    it('Should return color (black) for chosen username', function () {
+    it('Should return color (black) for chosen id', function () {
       mockId = '77b43e70-2e1a-11ec-9f75-f19bab93d384';
       assert.strictEqual(getColor(mockData, mockId), 'black');
     });
