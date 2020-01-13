@@ -6,6 +6,7 @@
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
+        "plugin:mocha/recommended",
         "airbnb"
     ],
     "globals": {
@@ -20,10 +21,12 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "mocha"
     ],
     "rules": {
       "react/jsx-filename-extension": 0,
-      "linebreak-style": 0
+      "linebreak-style": 0,
+      "react/prop-types": 0
     }
 }

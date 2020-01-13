@@ -1,0 +1,104 @@
+/* *{
+    border: 1px solid red;
+} */
+* {
+    font-family: 'Raleway', sans-serif;
+}
+.loginContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    min-height: 100vh;
+    background-color: #5d87b0;
+    padding: 10px 0;
+    box-sizing: border-box;
+}
+.subPagesContainer{
+    background-image: url("http://pluspng.com/img-png/chess-hd-png-how-chess-got-its-timeless-style-1000.png");
+    background-repeat: no-repeat;
+    background-size: 600px;
+    background-position-x: left;
+    background-position-y: bottom;
+    width: 800px;
+    height: 620px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    background-color: #fefefe;
+}
+h1, h2, h3, h4, h5, h6{
+    font-weight: bold;
+    text-align: center;
+}
+.loginUserText{
+    padding-top: 40px;
+}
+.gameListContainer{
+    justify-content: none;
+    flex-direction: none;
+    display: block;
+}
+.userNameContainer{
+    width: 100%;
+    display: flex;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 15px;
+    justify-content: center;
+}
+/* Components */
+.input{
+    display: block;
+    border: 1px solid #e6e6e6;
+    border-radius: 2px;
+    outline: none;
+    background: transparent;
+    font-family: 'Raleway', sans-serif;
+    font-size: 18px;
+    color: #333333;
+    line-height: 1.2;
+    padding: 0 12px;
+    height: 40px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.loginbutton{
+    background: #bed4ea;
+    border: 1px solid #255656;
+    color: #3e6b97;
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 15px 5px 0 0;
+    outline: none;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+}
+.maxWidth{
+    max-width: 14%;
+}
+/* ============= LobyPage ============= */
+.mainLobyPage{
+    display: flex;
+    flex-direction: row;
+}
+.mainLobyPage section{
+    width: 50%;
+}
+.gameNamePart{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

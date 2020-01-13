@@ -1,0 +1,17 @@
+[
+  {
+    "id": "577df54c-cf5e-43fe-8d91-232c6f0c9fc9",
+    "name": "pelles game",
+    "players": [
+      { "id": "uuid", "name": "Pelle", "color": "white" },
+      { "id": "uuid", "name": "Olle", "color": "black" }
+    ],
+    "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+    "history": [
+      {
+        "from": "e4",
+        "to": "e6"
+      }
+    ]
+  }
+]
